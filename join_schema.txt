@@ -1,0 +1,124 @@
+ACRP Table Schema
+-----------------
+
+TABLE tbllitauthor_tbllitkeywords, SIZE = 118
++---------------+--------------+------+-----+---------+----------------+
+| Field         | Type         | Null | Key | Default | Extra          |
++---------------+--------------+------+-----+---------+----------------+
+| aid           | int(5)       | NO   | PRI | NULL    | auto_increment | 
+| LitAuthorID   | varchar(255) | NO   |     |         |                | 
+| LitKeywordID1 | varchar(255) | NO   |     |         |                | 
+| LitKeywordID2 | varchar(255) | NO   |     |         |                | 
+| LitKeywordID3 | varchar(255) | NO   |     |         |                | 
+| LitKeywordID4 | varchar(255) | NO   |     |         |                | 
+| LitKeywordID5 | varchar(255) | NO   |     |         |                | 
+| LitKeywordID6 | varchar(255) | NO   |     |         |                | 
+| LitAuthority  | longtext     | NO   |     | NULL    |                | 
+| LitNotes      | longtext     | NO   |     | NULL    |                | 
++---------------+--------------+------+-----+---------+----------------+
+
+TABLE tbllitauthor_tbllitwork, SIZE = 9701
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| LitAuthorID      | int(10)     | YES  | MUL | NULL    |       | 
+| LitWorkID        | int(10)     | YES  | MUL | NULL    |       | 
+| Comments         | longtext    | YES  |     | NULL    |       | 
+| OrderNumber      | int(10)     | YES  |     | NULL    |       | 
++------------------+-------------+------+-----+---------+-------+
+
+TABLE tbllitauthor_tbltextpublisher, SIZE = 3
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| LitAuthorID      | int(10)     | YES  | MUL | NULL    |       | 
+| TextPublisherID  | int(10)     | YES  | MUL | NULL    |       | 
+| StartYear        | varchar(4)  | YES  |     | NULL    |       | 
+| EndYear          | varchar(4)  | YES  |     | NULL    |       | 
+| Comments         | longtext    | YES  |     | NULL    |       | 
++------------------+-------------+------+-----+---------+-------+
+
+TABLE tbllitwork_tbltextreview, SIZE = 1
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| LitWorkID        | int(10)     | YES  | MUL | NULL    |       | 
+| TextReviewID     | int(10)     | YES  | MUL | NULL    |       | 
++------------------+-------------+------+-----+---------+-------+
+
+TABLE tbllitwork_tbltextvoledition, SIZE = 154
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| LitWorkID        | int(10)     | YES  | MUL | NULL    |       | 
+| TextVolEditionID | int(10)     | YES  | MUL | NULL    |       | 
+| Comments         | longtext    | YES  |     | NULL    |       | 
++------------------+-------------+------+-----+---------+-------+
+
+TABLE tblreadborrower_tblrefarchivalitem, SIZE = 2068
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| ReadBorrowerID    | int(10)     | YES  | MUL | NULL    |       | 
+| RefArchivalItemID | int(10)     | YES  | MUL | NULL    |       | 
+| Comments          | longtext    | YES  |     | NULL    |       | 
++-------------------+-------------+------+-----+---------+-------+
+
+TABLE tblreadlibrary_tblcomments, SIZE = 7
++---------------+--------------+------+-----+---------+----------------+
+| Field         | Type         | Null | Key | Default | Extra          |
++---------------+--------------+------+-----+---------+----------------+
+| id            | int(5)       | NO   | PRI | NULL    | auto_increment | 
+| ReadLibraryID | varchar(255) | NO   |     |         |                | 
+| LoansRange    | varchar(255) | NO   |     |         |                | 
+| StartLoans    | varchar(255) | NO   |     |         |                | 
+| FinishLoans   | varchar(255) | NO   |     |         |                | 
+| Catalogue     | varchar(255) | NO   |     |         |                | 
+| Notes         | longtext     | NO   |     | NULL    |                | 
++---------------+--------------+------+-----+---------+----------------+
+
+TABLE tblreadlibrary_tblrefarchivalitem, SIZE = 1
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| ReadLibraryID     | int(10)     | YES  | MUL | NULL    |       | 
+| RefArchivalItemID | int(10)     | YES  | MUL | NULL    |       | 
+| Comments          | longtext    | YES  |     | NULL    |       | 
++-------------------+-------------+------+-----+---------+-------+
+
+TABLE tblreadloanissue_tblrefarchivalitem, SIZE = 86646
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| ReadLoanIssueID   | int(10)     | YES  | MUL | NULL    |       | 
+| RefArchivalItemID | int(10)     | YES  | MUL | NULL    |       | 
+| Comments          | longtext    | YES  |     | NULL    |       | 
++-------------------+-------------+------+-----+---------+-------+
+
+TABLE tblreadperiodicalcopy_tblrefarchivalitem, SIZE = 87
++----------------------+-------------+------+-----+---------+-------+
+| Field                | Type        | Null | Key | Default | Extra |
++----------------------+-------------+------+-----+---------+-------+
+| ReadPeriodicalCopyID | int(10)     | YES  | MUL | NULL    |       | 
+| RefArchivalItemID    | int(10)     | YES  | MUL | NULL    |       | 
+| Comments             | longtext    | YES  |     | NULL    |       | 
++----------------------+-------------+------+-----+---------+-------+
+
+TABLE tblreadvolcopy_tblrefarchivalitem, SIZE = 10392
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| ReadVolCopyID     | int(10)     | YES  | MUL | NULL    |       | 
+| RefArchivalItemID | int(10)     | YES  | MUL | NULL    |       | 
+| Comments          | longtext    | YES  |     | NULL    |       | 
++-------------------+-------------+------+-----+---------+-------+
+
+TABLE tbltextperiodicalstorysection_tbltextperiodicalissue, SIZE = 5
++------------------------------+-------------+------+-----+---------+-------+
+| Field                        | Type        | Null | Key | Default | Extra |
++------------------------------+-------------+------+-----+---------+-------+
+| TextPeriodicalStorySectionID | int(10)     | YES  | MUL | NULL    |       | 
+| TextPeriodicalIssueID        | int(10)     | YES  | MUL | NULL    |       | 
+| Comments                     | longtext    | YES  |     | NULL    |       | 
++------------------------------+-------------+------+-----+---------+-------+
+

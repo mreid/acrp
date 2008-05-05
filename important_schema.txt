@@ -1,0 +1,719 @@
+ACRP Table Schema
+-----------------
+
+TABLE tbllitauthor, SIZE = 4800
++-------------------------+--------------+------+-----+---------+----------------+
+| Field                   | Type         | Null | Key | Default | Extra          |
++-------------------------+--------------+------+-----+---------+----------------+
+| DNB                     | tinyint(1)   | NO   |     | 0       |                | 
+| Gender                  | tinyint(1)   | NO   |     | 0       |                | 
+| Pseudonym               | tinyint(1)   | NO   |     | 0       |                | 
+| LitAuthorID             | int(10)      | NO   | PRI | NULL    | auto_increment | 
+| Comments                | longtext     | YES  |     | NULL    |                | 
+| BirthYear               | varchar(4)   | YES  |     | NULL    |                | 
+| DeathYear               | varchar(4)   | YES  |     | NULL    |                | 
+| Title                   | varchar(25)  | YES  |     | NULL    |                | 
+| FirstName               | varchar(100) | YES  |     | NULL    |                | 
+| SecondName              | varchar(100) | YES  |     | NULL    |                | 
+| Surname                 | varchar(100) | YES  |     | NULL    |                | 
+| ActualLitAuthorID       | int(10)      | YES  | MUL | NULL    |                | 
+| ResidentualRefAddressID | int(10)      | YES  | MUL | NULL    |                | 
+| BirthPlaceRefAddressID  | int(10)      | YES  | MUL | NULL    |                | 
+| LocationID              | int(10)      | YES  |     | NULL    |                | 
+| Gen_Comments            | int(10)      | YES  |     | NULL    |                | 
+| s_ColLineage            | longblob     | YES  |     | NULL    |                | 
+| s_Generation            | int(10)      | YES  | MUL | NULL    |                | 
+| s_GUID                  | varchar(36)  | YES  | MUL | NULL    |                | 
+| s_Lineage               | longblob     | YES  |     | NULL    |                | 
+| Date_Created            | datetime     | YES  |     | NULL    |                | 
+| Created_By              | int(10)      | YES  |     | NULL    |                | 
+| Last_Update_Date        | datetime     | YES  |     | NULL    |                | 
+| Updated_By              | int(10)      | YES  |     | NULL    |                | 
++-------------------------+--------------+------+-----+---------+----------------+
+
+TABLE tbllitauthor_tbllitkeywords, SIZE = 118
++---------------+--------------+------+-----+---------+----------------+
+| Field         | Type         | Null | Key | Default | Extra          |
++---------------+--------------+------+-----+---------+----------------+
+| aid           | int(5)       | NO   | PRI | NULL    | auto_increment | 
+| LitAuthorID   | varchar(255) | NO   |     |         |                | 
+| LitKeywordID1 | varchar(255) | NO   |     |         |                | 
+| LitKeywordID2 | varchar(255) | NO   |     |         |                | 
+| LitKeywordID3 | varchar(255) | NO   |     |         |                | 
+| LitKeywordID4 | varchar(255) | NO   |     |         |                | 
+| LitKeywordID5 | varchar(255) | NO   |     |         |                | 
+| LitKeywordID6 | varchar(255) | NO   |     |         |                | 
+| LitAuthority  | longtext     | NO   |     | NULL    |                | 
+| LitNotes      | longtext     | NO   |     | NULL    |                | 
++---------------+--------------+------+-----+---------+----------------+
+
+TABLE tbllitauthor_tbllitwork, SIZE = 9701
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| LitAuthorID      | int(10)     | YES  | MUL | NULL    |       | 
+| LitWorkID        | int(10)     | YES  | MUL | NULL    |       | 
+| Comments         | longtext    | YES  |     | NULL    |       | 
+| LocationID       | int(10)     | YES  |     | NULL    |       | 
+| Gen_Comments     | int(10)     | YES  |     | NULL    |       | 
+| s_ColLineage     | longblob    | YES  |     | NULL    |       | 
+| s_Generation     | int(10)     | YES  | MUL | NULL    |       | 
+| s_GUID           | varchar(36) | YES  | MUL | NULL    |       | 
+| s_Lineage        | longblob    | YES  |     | NULL    |       | 
+| Date_Created     | datetime    | YES  |     | NULL    |       | 
+| Created_By       | int(10)     | YES  |     | NULL    |       | 
+| Last_Update_Date | datetime    | YES  |     | NULL    |       | 
+| Updated_By       | int(10)     | YES  |     | NULL    |       | 
+| OrderNumber      | int(10)     | YES  |     | NULL    |       | 
++------------------+-------------+------+-----+---------+-------+
+
+TABLE tbllitauthor_tbltextpublisher, SIZE = 3
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| LitAuthorID      | int(10)     | YES  | MUL | NULL    |       | 
+| TextPublisherID  | int(10)     | YES  | MUL | NULL    |       | 
+| StartYear        | varchar(4)  | YES  |     | NULL    |       | 
+| EndYear          | varchar(4)  | YES  |     | NULL    |       | 
+| Comments         | longtext    | YES  |     | NULL    |       | 
+| LocationID       | int(10)     | YES  |     | NULL    |       | 
+| Gen_Comments     | int(10)     | YES  |     | NULL    |       | 
+| s_ColLineage     | longblob    | YES  |     | NULL    |       | 
+| s_Generation     | int(10)     | YES  | MUL | NULL    |       | 
+| s_GUID           | varchar(36) | YES  | MUL | NULL    |       | 
+| s_Lineage        | longblob    | YES  |     | NULL    |       | 
+| Date_Created     | datetime    | YES  |     | NULL    |       | 
+| Created_By       | int(10)     | YES  |     | NULL    |       | 
+| Last_Update_Date | datetime    | YES  |     | NULL    |       | 
+| Updated_By       | int(10)     | YES  |     | NULL    |       | 
++------------------+-------------+------+-----+---------+-------+
+
+
+TABLE tbllitgenreindustrial, SIZE = 3
++----------------------+--------------+------+-----+---------+----------------+
+| Field                | Type         | Null | Key | Default | Extra          |
++----------------------+--------------+------+-----+---------+----------------+
+| LitGenreIndustrialID | int(10)      | NO   | PRI | NULL    | auto_increment | 
+| Comments             | longtext     | YES  |     | NULL    |                | 
+| Description          | longtext     | YES  |     | NULL    |                | 
+| Name                 | varchar(100) | YES  |     | NULL    |                | 
+| LocationID           | int(10)      | YES  |     | NULL    |                | 
+| Gen_Comments         | int(10)      | YES  |     | NULL    |                | 
+| Gen_Description      | int(10)      | YES  |     | NULL    |                | 
+| s_ColLineage         | longblob     | YES  |     | NULL    |                | 
+| s_Generation         | int(10)      | YES  | MUL | NULL    |                | 
+| s_GUID               | varchar(36)  | YES  | MUL | NULL    |                | 
+| s_Lineage            | longblob     | YES  |     | NULL    |                | 
+| Date_Created         | datetime     | YES  |     | NULL    |                | 
+| Created_By           | int(10)      | YES  |     | NULL    |                | 
+| Last_Update_Date     | datetime     | YES  |     | NULL    |                | 
+| Updated_By           | int(10)      | YES  |     | NULL    |                | 
++----------------------+--------------+------+-----+---------+----------------+
+
+TABLE tbllitwork, SIZE = 9147
++----------------------+--------------+------+-----+---------+----------------+
+| Field                | Type         | Null | Key | Default | Extra          |
++----------------------+--------------+------+-----+---------+----------------+
+| Fictionality         | tinyint(1)   | NO   |     | 0       |                | 
+| LitWorkID            | int(10)      | NO   | PRI | NULL    | auto_increment | 
+| Comments             | longtext     | YES  |     | NULL    |                | 
+| FirstPublicationYear | varchar(9)   | YES  |     | NULL    |                | 
+| Title                | varchar(255) | YES  |     | NULL    |                | 
+| TextPublisherID      | int(10)      | YES  | MUL | NULL    |                | 
+| ReadVolCopyID        | int(10)      | YES  |     | NULL    |                | 
+| LocationID           | int(10)      | YES  |     | NULL    |                | 
+| Gen_Comments         | int(10)      | YES  |     | NULL    |                | 
+| s_ColLineage         | longblob     | YES  |     | NULL    |                | 
+| s_Generation         | int(10)      | YES  | MUL | NULL    |                | 
+| s_GUID               | varchar(36)  | YES  | MUL | NULL    |                | 
+| s_Lineage            | longblob     | YES  |     | NULL    |                | 
+| Date_Created         | datetime     | YES  |     | NULL    |                | 
+| Created_By           | int(10)      | YES  |     | NULL    |                | 
+| Last_Update_Date     | datetime     | YES  |     | NULL    |                | 
+| Updated_By           | int(10)      | YES  |     | NULL    |                | 
+| ShortStory           | tinyint(1)   | NO   |     | 0       |                | 
++----------------------+--------------+------+-----+---------+----------------+
+
+
+TABLE tbllitwork_tbltextreview, SIZE = 1
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| LitWorkID        | int(10)     | YES  | MUL | NULL    |       | 
+| TextReviewID     | int(10)     | YES  | MUL | NULL    |       | 
+| LocationID       | int(10)     | YES  |     | NULL    |       | 
+| s_ColLineage     | longblob    | YES  |     | NULL    |       | 
+| s_Generation     | int(10)     | YES  | MUL | NULL    |       | 
+| s_GUID           | varchar(36) | YES  | MUL | NULL    |       | 
+| s_Lineage        | longblob    | YES  |     | NULL    |       | 
+| Date_Created     | datetime    | YES  |     | NULL    |       | 
+| Created_By       | int(10)     | YES  |     | NULL    |       | 
+| Last_Update_Date | datetime    | YES  |     | NULL    |       | 
+| Updated_By       | int(10)     | YES  |     | NULL    |       | 
++------------------+-------------+------+-----+---------+-------+
+
+TABLE tbllitwork_tbltextvoledition, SIZE = 154
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| LitWorkID        | int(10)     | YES  | MUL | NULL    |       | 
+| TextVolEditionID | int(10)     | YES  | MUL | NULL    |       | 
+| Comments         | longtext    | YES  |     | NULL    |       | 
+| LocationID       | int(10)     | YES  |     | NULL    |       | 
+| Gen_Comments     | int(10)     | YES  |     | NULL    |       | 
+| s_ColLineage     | longblob    | YES  |     | NULL    |       | 
+| s_Generation     | int(10)     | YES  | MUL | NULL    |       | 
+| s_GUID           | varchar(36) | YES  | MUL | NULL    |       | 
+| s_Lineage        | longblob    | YES  |     | NULL    |       | 
+| Date_Created     | datetime    | YES  |     | NULL    |       | 
+| Created_By       | int(10)     | YES  |     | NULL    |       | 
+| Last_Update_Date | datetime    | YES  |     | NULL    |       | 
+| Updated_By       | int(10)     | YES  |     | NULL    |       | 
++------------------+-------------+------+-----+---------+-------+
+
+TABLE tblreadborrower, SIZE = 3125
++------------------+--------------+------+-----+---------+----------------+
+| Field            | Type         | Null | Key | Default | Extra          |
++------------------+--------------+------+-----+---------+----------------+
+| Gender           | tinyint(1)   | NO   |     | 0       |                | 
+| ReadBorrowerID   | int(10)      | NO   | PRI | NULL    | auto_increment | 
+| Comments         | longtext     | YES  |     | NULL    |                | 
+| Title            | varchar(10)  | YES  |     | NULL    |                | 
+| FirstName        | varchar(100) | YES  |     | NULL    |                | 
+| SecondName       | varchar(100) | YES  |     | NULL    |                | 
+| Surname          | varchar(100) | YES  |     | NULL    |                | 
+| RefAddressID     | int(10)      | YES  | MUL | NULL    |                | 
+| ReadOccupationID | int(10)      | YES  | MUL | NULL    |                | 
+| ReadLibraryID    | int(10)      | YES  | MUL | NULL    |                | 
+| LocationID       | int(10)      | YES  |     | NULL    |                | 
+| Gen_Comments     | int(10)      | YES  |     | NULL    |                | 
+| s_ColLineage     | longblob     | YES  |     | NULL    |                | 
+| s_Generation     | int(10)      | YES  | MUL | NULL    |                | 
+| s_GUID           | varchar(36)  | YES  | MUL | NULL    |                | 
+| s_Lineage        | longblob     | YES  |     | NULL    |                | 
+| Date_Created     | datetime     | YES  |     | NULL    |                | 
+| Created_By       | int(10)      | YES  |     | NULL    |                | 
+| Last_Update_Date | datetime     | YES  |     | NULL    |                | 
+| Updated_By       | int(10)      | YES  |     | NULL    |                | 
+| MembershipDates  | varchar(50)  | YES  |     | NULL    |                | 
++------------------+--------------+------+-----+---------+----------------+
+
+TABLE tblreadborrower_tblrefarchivalitem, SIZE = 2068
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| ReadBorrowerID    | int(10)     | YES  | MUL | NULL    |       | 
+| RefArchivalItemID | int(10)     | YES  | MUL | NULL    |       | 
+| Comments          | longtext    | YES  |     | NULL    |       | 
+| LocationID        | int(10)     | YES  |     | NULL    |       | 
+| Gen_Comments      | int(10)     | YES  |     | NULL    |       | 
+| s_ColLineage      | longblob    | YES  |     | NULL    |       | 
+| s_Generation      | int(10)     | YES  | MUL | NULL    |       | 
+| s_GUID            | varchar(36) | YES  | MUL | NULL    |       | 
+| s_Lineage         | longblob    | YES  |     | NULL    |       | 
+| Date_Created      | datetime    | YES  |     | NULL    |       | 
+| Created_By        | int(10)     | YES  |     | NULL    |       | 
+| Last_Update_Date  | datetime    | YES  |     | NULL    |       | 
+| Updated_By        | int(10)     | YES  |     | NULL    |       | 
++-------------------+-------------+------+-----+---------+-------+
+
+TABLE tblreadlibrary, SIZE = 11
++------------------+--------------+------+-----+---------+----------------+
+| Field            | Type         | Null | Key | Default | Extra          |
++------------------+--------------+------+-----+---------+----------------+
+| ReadLibraryID    | int(10)      | NO   | PRI | NULL    | auto_increment | 
+| Comments         | longtext     | YES  |     | NULL    |                | 
+| BorrowerFees     | varchar(50)  | YES  |     | NULL    |                | 
+| RegistrationFees | varchar(50)  | YES  |     | NULL    |                | 
+| Type             | int(10)      | YES  |     | NULL    |                | 
+| Name             | varchar(100) | YES  |     | NULL    |                | 
+| RefAddressID     | int(10)      | YES  | MUL | NULL    |                | 
+| LocationID       | int(10)      | YES  |     | NULL    |                | 
+| Gen_Comments     | int(10)      | YES  |     | NULL    |                | 
+| s_ColLineage     | longblob     | YES  |     | NULL    |                | 
+| s_Generation     | int(10)      | YES  | MUL | NULL    |                | 
+| s_GUID           | varchar(36)  | YES  | MUL | NULL    |                | 
+| s_Lineage        | longblob     | YES  |     | NULL    |                | 
+| Date_Created     | datetime     | YES  |     | NULL    |                | 
+| Created_By       | int(10)      | YES  |     | NULL    |                | 
+| Last_Update_Date | datetime     | YES  |     | NULL    |                | 
+| Updated_By       | int(10)      | YES  |     | NULL    |                | 
++------------------+--------------+------+-----+---------+----------------+
+
+TABLE tblreadlibrary_tblcomments, SIZE = 7
++---------------+--------------+------+-----+---------+----------------+
+| Field         | Type         | Null | Key | Default | Extra          |
++---------------+--------------+------+-----+---------+----------------+
+| id            | int(5)       | NO   | PRI | NULL    | auto_increment | 
+| ReadLibraryID | varchar(255) | NO   |     |         |                | 
+| LoansRange    | varchar(255) | NO   |     |         |                | 
+| StartLoans    | varchar(255) | NO   |     |         |                | 
+| FinishLoans   | varchar(255) | NO   |     |         |                | 
+| Catalogue     | varchar(255) | NO   |     |         |                | 
+| Notes         | longtext     | NO   |     | NULL    |                | 
++---------------+--------------+------+-----+---------+----------------+
+
+TABLE tblreadlibrary_tblrefarchivalitem, SIZE = 1
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| ReadLibraryID     | int(10)     | YES  | MUL | NULL    |       | 
+| RefArchivalItemID | int(10)     | YES  | MUL | NULL    |       | 
+| Comments          | longtext    | YES  |     | NULL    |       | 
+| LocationID        | int(10)     | YES  |     | NULL    |       | 
+| Gen_Comments      | int(10)     | YES  |     | NULL    |       | 
+| s_ColLineage      | longblob    | YES  |     | NULL    |       | 
+| s_Generation      | int(10)     | YES  | MUL | NULL    |       | 
+| s_GUID            | varchar(36) | YES  | MUL | NULL    |       | 
+| s_Lineage         | longblob    | YES  |     | NULL    |       | 
+| Date_Created      | datetime    | YES  |     | NULL    |       | 
+| Created_By        | int(10)     | YES  |     | NULL    |       | 
+| Last_Update_Date  | datetime    | YES  |     | NULL    |       | 
+| Updated_By        | int(10)     | YES  |     | NULL    |       | 
++-------------------+-------------+------+-----+---------+-------+
+
+TABLE tblreadloanissue, SIZE = 100621
++----------------------+-------------+------+-----+---------+----------------+
+| Field                | Type        | Null | Key | Default | Extra          |
++----------------------+-------------+------+-----+---------+----------------+
+| LoanIssueDate        | datetime    | YES  |     | NULL    |                | 
+| ReadLoanIssueID      | int(10)     | NO   | PRI | NULL    | auto_increment | 
+| ReadBorrowerID       | int(10)     | YES  | MUL | NULL    |                | 
+| ReadVolCopyID        | int(10)     | YES  | MUL | NULL    |                | 
+| ReadPeriodicalCopyID | int(10)     | YES  | MUL | NULL    |                | 
+| LocationID           | int(10)     | YES  |     | NULL    |                | 
+| s_ColLineage         | longblob    | YES  |     | NULL    |                | 
+| s_Generation         | int(10)     | YES  | MUL | NULL    |                | 
+| s_GUID               | varchar(36) | YES  | MUL | NULL    |                | 
+| s_Lineage            | longblob    | YES  |     | NULL    |                | 
+| Date_Created         | datetime    | YES  |     | NULL    |                | 
+| Created_By           | int(10)     | YES  |     | NULL    |                | 
+| Last_Update_Date     | datetime    | YES  |     | NULL    |                | 
+| Updated_By           | int(10)     | YES  |     | NULL    |                | 
+| LoanIssueDateRange   | varchar(10) | YES  |     | NULL    |                | 
++----------------------+-------------+------+-----+---------+----------------+
+
+TABLE tblreadloanissue_tblrefarchivalitem, SIZE = 86646
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| ReadLoanIssueID   | int(10)     | YES  | MUL | NULL    |       | 
+| RefArchivalItemID | int(10)     | YES  | MUL | NULL    |       | 
+| Comments          | longtext    | YES  |     | NULL    |       | 
+| LocationID        | int(10)     | YES  |     | NULL    |       | 
+| Gen_Comments      | int(10)     | YES  |     | NULL    |       | 
+| s_ColLineage      | longblob    | YES  |     | NULL    |       | 
+| s_Generation      | int(10)     | YES  | MUL | NULL    |       | 
+| s_GUID            | varchar(36) | YES  | MUL | NULL    |       | 
+| s_Lineage         | longblob    | YES  |     | NULL    |       | 
+| Date_Created      | datetime    | YES  |     | NULL    |       | 
+| Created_By        | int(10)     | YES  |     | NULL    |       | 
+| Last_Update_Date  | datetime    | YES  |     | NULL    |       | 
+| Updated_By        | int(10)     | YES  |     | NULL    |       | 
++-------------------+-------------+------+-----+---------+-------+
+
+TABLE tblreadoccupation, SIZE = 237
++------------------+--------------+------+-----+---------+----------------+
+| Field            | Type         | Null | Key | Default | Extra          |
++------------------+--------------+------+-----+---------+----------------+
+| ReadOccupationID | int(10)      | NO   | PRI | NULL    | auto_increment | 
+| Comments         | longtext     | YES  |     | NULL    |                | 
+| Type             | int(10)      | YES  |     | NULL    |                | 
+| Name             | varchar(100) | YES  |     | NULL    |                | 
+| LocationID       | int(10)      | YES  |     | NULL    |                | 
+| Gen_Comments     | int(10)      | YES  |     | NULL    |                | 
+| s_ColLineage     | longblob     | YES  |     | NULL    |                | 
+| s_Generation     | int(10)      | YES  | MUL | NULL    |                | 
+| s_GUID           | varchar(36)  | YES  | MUL | NULL    |                | 
+| s_Lineage        | longblob     | YES  |     | NULL    |                | 
+| Date_Created     | datetime     | YES  |     | NULL    |                | 
+| Created_By       | int(10)      | YES  |     | NULL    |                | 
+| Last_Update_Date | datetime     | YES  |     | NULL    |                | 
+| Updated_By       | int(10)      | YES  |     | NULL    |                | 
++------------------+--------------+------+-----+---------+----------------+
+
+TABLE tblreadperiodicalcopy, SIZE = 118
++-----------------------+-------------+------+-----+---------+----------------+
+| Field                 | Type        | Null | Key | Default | Extra          |
++-----------------------+-------------+------+-----+---------+----------------+
+| ReadPeriodicalCopyID  | int(10)     | NO   | PRI | NULL    | auto_increment | 
+| Comments              | longtext    | YES  |     | NULL    |                | 
+| ReferenceNumber       | varchar(25) | YES  |     | NULL    |                | 
+| ReadLibraryID         | int(10)     | YES  | MUL | NULL    |                | 
+| LocationID            | int(10)     | YES  |     | NULL    |                | 
+| TextPeriodicalIssueID | int(10)     | YES  | MUL | NULL    |                | 
+| Gen_Comments          | int(10)     | YES  |     | NULL    |                | 
+| s_ColLineage          | longblob    | YES  |     | NULL    |                | 
+| s_Generation          | int(10)     | YES  | MUL | NULL    |                | 
+| s_GUID                | varchar(36) | YES  | MUL | NULL    |                | 
+| s_Lineage             | longblob    | YES  |     | NULL    |                | 
+| Date_Created          | datetime    | YES  |     | NULL    |                | 
+| Created_By            | int(10)     | YES  |     | NULL    |                | 
+| Last_Update_Date      | datetime    | YES  |     | NULL    |                | 
+| Updated_By            | int(10)     | YES  |     | NULL    |                | 
+| DateReceived          | varchar(50) | YES  |     | NULL    |                | 
+| PurchasePrice         | varchar(50) | YES  |     | NULL    |                | 
++-----------------------+-------------+------+-----+---------+----------------+
+
+TABLE tblreadperiodicalcopy_tblrefarchivalitem, SIZE = 87
++----------------------+-------------+------+-----+---------+-------+
+| Field                | Type        | Null | Key | Default | Extra |
++----------------------+-------------+------+-----+---------+-------+
+| ReadPeriodicalCopyID | int(10)     | YES  | MUL | NULL    |       | 
+| RefArchivalItemID    | int(10)     | YES  | MUL | NULL    |       | 
+| Comments             | longtext    | YES  |     | NULL    |       | 
+| LocationID           | int(10)     | YES  |     | NULL    |       | 
+| Gen_Comments         | int(10)     | YES  |     | NULL    |       | 
+| s_ColLineage         | longblob    | YES  |     | NULL    |       | 
+| s_Generation         | int(10)     | YES  | MUL | NULL    |       | 
+| s_GUID               | varchar(36) | YES  | MUL | NULL    |       | 
+| s_Lineage            | longblob    | YES  |     | NULL    |       | 
+| Date_Created         | datetime    | YES  |     | NULL    |       | 
+| Created_By           | int(10)     | YES  |     | NULL    |       | 
+| Last_Update_Date     | datetime    | YES  |     | NULL    |       | 
+| Updated_By           | int(10)     | YES  |     | NULL    |       | 
++----------------------+-------------+------+-----+---------+-------+
+
+TABLE tblreadvolcopy, SIZE = 12352
++------------------+-------------+------+-----+---------+----------------+
+| Field            | Type        | Null | Key | Default | Extra          |
++------------------+-------------+------+-----+---------+----------------+
+| ReadVolCopyID    | int(10)     | NO   | PRI | NULL    | auto_increment | 
+| Comments         | longtext    | YES  |     | NULL    |                | 
+| ReferenceNumber  | varchar(25) | YES  |     | NULL    |                | 
+| ReadLibraryID    | int(10)     | YES  | MUL | NULL    |                | 
+| LocationID       | int(10)     | YES  |     | NULL    |                | 
+| LitWorkID        | int(10)     | YES  | MUL | NULL    |                | 
+| TextVolEditionID | int(10)     | YES  | MUL | NULL    |                | 
+| Gen_Comments     | int(10)     | YES  |     | NULL    |                | 
+| s_ColLineage     | longblob    | YES  |     | NULL    |                | 
+| s_Generation     | int(10)     | YES  | MUL | NULL    |                | 
+| s_GUID           | varchar(36) | YES  | MUL | NULL    |                | 
+| s_Lineage        | longblob    | YES  |     | NULL    |                | 
+| Date_Created     | datetime    | YES  |     | NULL    |                | 
+| Created_By       | int(10)     | YES  |     | NULL    |                | 
+| Last_Update_Date | datetime    | YES  |     | NULL    |                | 
+| Updated_By       | int(10)     | YES  |     | NULL    |                | 
+| DateReceived     | varchar(50) | YES  |     | NULL    |                | 
+| PurchasePrice    | varchar(50) | YES  |     | NULL    |                | 
++------------------+-------------+------+-----+---------+----------------+
+
+TABLE tblreadvolcopy_tblrefarchivalitem, SIZE = 10392
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| ReadVolCopyID     | int(10)     | YES  | MUL | NULL    |       | 
+| RefArchivalItemID | int(10)     | YES  | MUL | NULL    |       | 
+| Comments          | longtext    | YES  |     | NULL    |       | 
+| LocationID        | int(10)     | YES  |     | NULL    |       | 
+| Gen_Comments      | int(10)     | YES  |     | NULL    |       | 
+| s_ColLineage      | longblob    | YES  |     | NULL    |       | 
+| s_Generation      | int(10)     | YES  | MUL | NULL    |       | 
+| s_GUID            | varchar(36) | YES  | MUL | NULL    |       | 
+| s_Lineage         | longblob    | YES  |     | NULL    |       | 
+| Date_Created      | datetime    | YES  |     | NULL    |       | 
+| Created_By        | int(10)     | YES  |     | NULL    |       | 
+| Last_Update_Date  | datetime    | YES  |     | NULL    |       | 
+| Updated_By        | int(10)     | YES  |     | NULL    |       | 
++-------------------+-------------+------+-----+---------+-------+
+
+TABLE tblrefaddress, SIZE = 399
++------------------+--------------+------+-----+---------+----------------+
+| Field            | Type         | Null | Key | Default | Extra          |
++------------------+--------------+------+-----+---------+----------------+
+| RefAddressID     | int(10)      | NO   | PRI | NULL    | auto_increment | 
+| State            | int(10)      | YES  |     | NULL    |                | 
+| BuildingNumber   | varchar(5)   | YES  |     | NULL    |                | 
+| PostCode         | varchar(10)  | YES  |     | NULL    |                | 
+| BuildingName     | varchar(30)  | YES  |     | NULL    |                | 
+| StreetName       | varchar(30)  | YES  |     | NULL    |                | 
+| Country          | int(10)      | YES  |     | NULL    |                | 
+| Suburb           | varchar(50)  | YES  |     | NULL    |                | 
+| Type             | int(10)      | YES  |     | NULL    |                | 
+| Line1            | varchar(100) | YES  |     | NULL    |                | 
+| Line2            | varchar(100) | YES  |     | NULL    |                | 
+| LocationID       | int(10)      | YES  |     | NULL    |                | 
+| s_ColLineage     | longblob     | YES  |     | NULL    |                | 
+| s_Generation     | int(10)      | YES  | MUL | NULL    |                | 
+| s_GUID           | varchar(36)  | YES  | MUL | NULL    |                | 
+| s_Lineage        | longblob     | YES  |     | NULL    |                | 
+| Date_Created     | datetime     | YES  |     | NULL    |                | 
+| Created_By       | int(10)      | YES  |     | NULL    |                | 
+| Last_Update_Date | datetime     | YES  |     | NULL    |                | 
+| Updated_By       | int(10)      | YES  |     | NULL    |                | 
+| CountryName      | varchar(100) | YES  |     | NULL    |                | 
+| StateName        | varchar(100) | YES  |     | NULL    |                | 
+| CountryOnly      | tinyint(1)   | NO   |     | 0       |                | 
++------------------+--------------+------+-----+---------+----------------+
+
+TABLE tblrefarchivalitem, SIZE = 20
++-------------------+--------------+------+-----+---------+----------------+
+| Field             | Type         | Null | Key | Default | Extra          |
++-------------------+--------------+------+-----+---------+----------------+
+| RefArchivalItemID | int(10)      | NO   | PRI | NULL    | auto_increment | 
+| Comments          | longtext     | YES  |     | NULL    |                | 
+| AccessionNumber   | varchar(50)  | YES  |     | NULL    |                | 
+| Type              | int(10)      | YES  |     | NULL    |                | 
+| Name              | varchar(255) | YES  |     | NULL    |                | 
+| RefArchiveID      | int(10)      | YES  | MUL | NULL    |                | 
+| LocationID        | int(10)      | YES  |     | NULL    |                | 
+| Gen_Comments      | int(10)      | YES  |     | NULL    |                | 
+| s_ColLineage      | longblob     | YES  |     | NULL    |                | 
+| s_Generation      | int(10)      | YES  | MUL | NULL    |                | 
+| s_GUID            | varchar(36)  | YES  | MUL | NULL    |                | 
+| s_Lineage         | longblob     | YES  |     | NULL    |                | 
+| Date_Created      | datetime     | YES  |     | NULL    |                | 
+| Created_By        | int(10)      | YES  |     | NULL    |                | 
+| Last_Update_Date  | datetime     | YES  |     | NULL    |                | 
+| Updated_By        | int(10)      | YES  |     | NULL    |                | 
++-------------------+--------------+------+-----+---------+----------------+
+
+TABLE tblrefarchive, SIZE = 11
++------------------+--------------+------+-----+---------+----------------+
+| Field            | Type         | Null | Key | Default | Extra          |
++------------------+--------------+------+-----+---------+----------------+
+| RefArchiveID     | int(10)      | NO   | PRI | NULL    | auto_increment | 
+| Comments         | longtext     | YES  |     | NULL    |                | 
+| Name             | varchar(50)  | YES  |     | NULL    |                | 
+| URL              | varchar(100) | YES  |     | NULL    |                | 
+| RefAddressID     | int(10)      | YES  | MUL | NULL    |                | 
+| LocationID       | int(10)      | YES  |     | NULL    |                | 
+| Gen_Comments     | int(10)      | YES  |     | NULL    |                | 
+| s_ColLineage     | longblob     | YES  |     | NULL    |                | 
+| s_Generation     | int(10)      | YES  | MUL | NULL    |                | 
+| s_GUID           | varchar(36)  | YES  | MUL | NULL    |                | 
+| s_Lineage        | longblob     | YES  |     | NULL    |                | 
+| Date_Created     | datetime     | YES  |     | NULL    |                | 
+| Created_By       | int(10)      | YES  |     | NULL    |                | 
+| Last_Update_Date | datetime     | YES  |     | NULL    |                | 
+| Updated_By       | int(10)      | YES  |     | NULL    |                | 
++------------------+--------------+------+-----+---------+----------------+
+
+TABLE tblreport, SIZE = 12
++---------------------+--------------+------+-----+---------+----------------+
+| Field               | Type         | Null | Key | Default | Extra          |
++---------------------+--------------+------+-----+---------+----------------+
+| ReportID            | int(10)      | NO   | PRI | NULL    | auto_increment | 
+| Description         | longtext     | YES  |     | NULL    |                | 
+| WhereClause         | varchar(255) | YES  |     | NULL    |                | 
+| LookupsRequired     | longtext     | YES  |     | NULL    |                | 
+| LocationID          | int(10)      | YES  |     | NULL    |                | 
+| Date_Created        | datetime     | YES  |     | NULL    |                | 
+| Created_By          | int(10)      | YES  |     | NULL    |                | 
+| Last_Update_Date    | datetime     | YES  |     | NULL    |                | 
+| Updated_By          | int(10)      | YES  |     | NULL    |                | 
+| Type                | int(10)      | YES  |     | NULL    |                | 
+| Aen_Description     | int(10)      | YES  |     | NULL    |                | 
+| Gen_LookupsRequired | int(10)      | YES  |     | NULL    |                | 
+| s_ColLineage        | longblob     | YES  |     | NULL    |                | 
+| s_Generation        | int(10)      | YES  | MUL | NULL    |                | 
+| s_GUID              | varchar(36)  | YES  | MUL | NULL    |                | 
+| s_Lineage           | longblob     | YES  |     | NULL    |                | 
+| AccessReportName    | varchar(100) | YES  |     | NULL    |                | 
+| DisplayName         | varchar(100) | YES  |     | NULL    |                | 
++---------------------+--------------+------+-----+---------+----------------+
+
+TABLE tbltextperiodical, SIZE = 128
++-----------------------+--------------+------+-----+---------+----------------+
+| Field                 | Type         | Null | Key | Default | Extra          |
++-----------------------+--------------+------+-----+---------+----------------+
+| TextPeriodicalID      | int(10)      | NO   | PRI | NULL    | auto_increment | 
+| Comments              | longtext     | YES  |     | NULL    |                | 
+| EndYear               | varchar(4)   | YES  |     | NULL    |                | 
+| StartYear             | varchar(4)   | YES  |     | NULL    |                | 
+| MedianAustCirculation | varchar(8)   | YES  |     | NULL    |                | 
+| MedianUKCirculation   | varchar(8)   | YES  |     | NULL    |                | 
+| Title                 | varchar(100) | YES  |     | NULL    |                | 
+| TextPublisherID       | int(10)      | YES  | MUL | NULL    |                | 
+| TextProductionScaleID | int(10)      | YES  | MUL | NULL    |                | 
+| LocationID            | int(10)      | YES  |     | NULL    |                | 
+| Gen_Comments          | int(10)      | YES  |     | NULL    |                | 
+| s_ColLineage          | longblob     | YES  |     | NULL    |                | 
+| s_Generation          | int(10)      | YES  | MUL | NULL    |                | 
+| s_GUID                | varchar(36)  | YES  | MUL | NULL    |                | 
+| s_Lineage             | longblob     | YES  |     | NULL    |                | 
+| Date_Created          | datetime     | YES  |     | NULL    |                | 
+| Created_By            | int(10)      | YES  |     | NULL    |                | 
+| Last_Update_Date      | datetime     | YES  |     | NULL    |                | 
+| Updated_By            | int(10)      | YES  |     | NULL    |                | 
++-----------------------+--------------+------+-----+---------+----------------+
+
+TABLE tbltextperiodicalissue, SIZE = 3546
++-----------------------+-------------+------+-----+---------+----------------+
+| Field                 | Type        | Null | Key | Default | Extra          |
++-----------------------+-------------+------+-----+---------+----------------+
+| TextPeriodicalIssueID | int(10)     | NO   | PRI | NULL    | auto_increment | 
+| Comments              | longtext    | YES  |     | NULL    |                | 
+| IssueYear             | varchar(4)  | YES  |     | NULL    |                | 
+| VolumeNumber          | varchar(6)  | YES  |     | NULL    |                | 
+| BiMonthly             | varchar(25) | YES  |     | NULL    |                | 
+| IssueDay              | varchar(25) | YES  |     | NULL    |                | 
+| IssueMonth            | varchar(25) | YES  |     | NULL    |                | 
+| SpecialDescriptor     | varchar(50) | YES  |     | NULL    |                | 
+| TextPeriodicalID      | int(10)     | YES  | MUL | NULL    |                | 
+| LocationID            | int(10)     | YES  |     | NULL    |                | 
+| Gen_Comments          | int(10)     | YES  |     | NULL    |                | 
+| s_ColLineage          | longblob    | YES  |     | NULL    |                | 
+| s_Generation          | int(10)     | YES  | MUL | NULL    |                | 
+| s_GUID                | varchar(36) | YES  | MUL | NULL    |                | 
+| s_Lineage             | longblob    | YES  |     | NULL    |                | 
+| Date_Created          | datetime    | YES  |     | NULL    |                | 
+| Created_By            | int(10)     | YES  |     | NULL    |                | 
+| Last_Update_Date      | datetime    | YES  |     | NULL    |                | 
+| Updated_By            | int(10)     | YES  |     | NULL    |                | 
+| IssueNumber           | varchar(50) | YES  |     | NULL    |                | 
++-----------------------+-------------+------+-----+---------+----------------+
+
+TABLE tbltextperiodicalstorysection, SIZE = 7
++------------------------------+-------------+------+-----+---------+----------------+
+| Field                        | Type        | Null | Key | Default | Extra          |
++------------------------------+-------------+------+-----+---------+----------------+
+| TextPeriodicalStorySectionID | int(10)     | NO   | PRI | NULL    | auto_increment | 
+| Comments                     | longtext    | YES  |     | NULL    |                | 
+| EndPage                      | varchar(5)  | YES  |     | NULL    |                | 
+| StartPage                    | varchar(5)  | YES  |     | NULL    |                | 
+| LitWorkID                    | int(10)     | YES  | MUL | NULL    |                | 
+| LocationID                   | int(10)     | YES  |     | NULL    |                | 
+| Gen_Comments                 | int(10)     | YES  |     | NULL    |                | 
+| s_ColLineage                 | longblob    | YES  |     | NULL    |                | 
+| s_Generation                 | int(10)     | YES  | MUL | NULL    |                | 
+| s_GUID                       | varchar(36) | YES  | MUL | NULL    |                | 
+| s_Lineage                    | longblob    | YES  |     | NULL    |                | 
+| Date_Created                 | datetime    | YES  |     | NULL    |                | 
+| Created_By                   | int(10)     | YES  |     | NULL    |                | 
+| Last_Update_Date             | datetime    | YES  |     | NULL    |                | 
+| Updated_By                   | int(10)     | YES  |     | NULL    |                | 
+| Sketch                       | tinyint(1)  | NO   |     | 0       |                | 
++------------------------------+-------------+------+-----+---------+----------------+
+
+TABLE tbltextperiodicalstorysection_tbltextperiodicalissue, SIZE = 5
++------------------------------+-------------+------+-----+---------+-------+
+| Field                        | Type        | Null | Key | Default | Extra |
++------------------------------+-------------+------+-----+---------+-------+
+| TextPeriodicalStorySectionID | int(10)     | YES  | MUL | NULL    |       | 
+| TextPeriodicalIssueID        | int(10)     | YES  | MUL | NULL    |       | 
+| Comments                     | longtext    | YES  |     | NULL    |       | 
+| LocationID                   | int(10)     | YES  |     | NULL    |       | 
+| Gen_Comments                 | int(10)     | YES  |     | NULL    |       | 
+| s_ColLineage                 | longblob    | YES  |     | NULL    |       | 
+| s_Generation                 | int(10)     | YES  | MUL | NULL    |       | 
+| s_GUID                       | varchar(36) | YES  | MUL | NULL    |       | 
+| s_Lineage                    | longblob    | YES  |     | NULL    |       | 
+| Date_Created                 | datetime    | YES  |     | NULL    |       | 
+| Created_By                   | int(10)     | YES  |     | NULL    |       | 
+| Last_Update_Date             | datetime    | YES  |     | NULL    |       | 
+| Updated_By                   | int(10)     | YES  |     | NULL    |       | 
++------------------------------+-------------+------+-----+---------+-------+
+
+TABLE tbltextproductionscale, SIZE = 2
++-----------------------+--------------+------+-----+---------+----------------+
+| Field                 | Type         | Null | Key | Default | Extra          |
++-----------------------+--------------+------+-----+---------+----------------+
+| TextProductionScaleID | int(10)      | NO   | PRI | NULL    | auto_increment | 
+| Comments              | longtext     | YES  |     | NULL    |                | 
+| Description           | longtext     | YES  |     | NULL    |                | 
+| Name                  | varchar(100) | YES  |     | NULL    |                | 
+| LocationID            | int(10)      | YES  |     | NULL    |                | 
+| Gen_Comments          | int(10)      | YES  |     | NULL    |                | 
+| Gen_Description       | int(10)      | YES  |     | NULL    |                | 
+| s_ColLineage          | longblob     | YES  |     | NULL    |                | 
+| s_Generation          | int(10)      | YES  | MUL | NULL    |                | 
+| s_GUID                | varchar(36)  | YES  | MUL | NULL    |                | 
+| s_Lineage             | longblob     | YES  |     | NULL    |                | 
+| Date_Created          | datetime     | YES  |     | NULL    |                | 
+| Created_By            | int(10)      | YES  |     | NULL    |                | 
+| Last_Update_Date      | datetime     | YES  |     | NULL    |                | 
+| Updated_By            | int(10)      | YES  |     | NULL    |                | 
++-----------------------+--------------+------+-----+---------+----------------+
+
+TABLE tbltextpublisher, SIZE = 369
++--------------------+-------------+------+-----+---------+----------------+
+| Field              | Type        | Null | Key | Default | Extra          |
++--------------------+-------------+------+-----+---------+----------------+
+| TextPublisherID    | int(10)     | NO   | PRI | NULL    | auto_increment | 
+| Comments           | longtext    | YES  |     | NULL    |                | 
+| PrincipalFirstName | varchar(25) | YES  |     | NULL    |                | 
+| PrincipalSurname   | varchar(25) | YES  |     | NULL    |                | 
+| Name               | varchar(50) | YES  |     | NULL    |                | 
+| RefAddressID       | int(10)     | YES  | MUL | NULL    |                | 
+| LocationID         | int(10)     | YES  |     | NULL    |                | 
+| Gen_Comments       | int(10)     | YES  |     | NULL    |                | 
+| s_ColLineage       | longblob    | YES  |     | NULL    |                | 
+| s_Generation       | int(10)     | YES  | MUL | NULL    |                | 
+| s_GUID             | varchar(36) | YES  | MUL | NULL    |                | 
+| s_Lineage          | longblob    | YES  |     | NULL    |                | 
+| Date_Created       | datetime    | YES  |     | NULL    |                | 
+| Created_By         | int(10)     | YES  |     | NULL    |                | 
+| Last_Update_Date   | datetime    | YES  |     | NULL    |                | 
+| Updated_By         | int(10)     | YES  |     | NULL    |                | 
+| AlternateNames     | longtext    | YES  |     | NULL    |                | 
+| Gen_AlternateNames | int(10)     | YES  |     | NULL    |                | 
++--------------------+-------------+------+-----+---------+----------------+
+
+TABLE tbltextreview, SIZE = 2
++-----------------------+--------------+------+-----+---------+----------------+
+| Field                 | Type         | Null | Key | Default | Extra          |
++-----------------------+--------------+------+-----+---------+----------------+
+| TextReviewID          | int(10)      | NO   | PRI | NULL    | auto_increment | 
+| Comments              | longtext     | YES  |     | NULL    |                | 
+| EndPage               | varchar(5)   | YES  |     | NULL    |                | 
+| StartPage             | varchar(5)   | YES  |     | NULL    |                | 
+| Title                 | varchar(100) | YES  |     | NULL    |                | 
+| LitAuthorID           | int(10)      | YES  | MUL | NULL    |                | 
+| TextPeriodicalIssueID | int(10)      | YES  | MUL | NULL    |                | 
+| LocationID            | int(10)      | YES  |     | NULL    |                | 
+| Gen_Comments          | int(10)      | YES  |     | NULL    |                | 
+| s_ColLineage          | longblob     | YES  |     | NULL    |                | 
+| s_Generation          | int(10)      | YES  | MUL | NULL    |                | 
+| s_GUID                | varchar(36)  | YES  | MUL | NULL    |                | 
+| s_Lineage             | longblob     | YES  |     | NULL    |                | 
+| Date_Created          | datetime     | YES  |     | NULL    |                | 
+| Created_By            | int(10)      | YES  |     | NULL    |                | 
+| Last_Update_Date      | datetime     | YES  |     | NULL    |                | 
+| Updated_By            | int(10)      | YES  |     | NULL    |                | 
++-----------------------+--------------+------+-----+---------+----------------+
+
+TABLE tbltextvoledition, SIZE = 54
++-----------------------+---------------+------+-----+---------+----------------+
+| Field                 | Type          | Null | Key | Default | Extra          |
++-----------------------+---------------+------+-----+---------+----------------+
+| Price                 | decimal(19,4) | YES  |     | NULL    |                | 
+| TextVolEditionID      | int(10)       | NO   | PRI | NULL    | auto_increment | 
+| Comments              | longtext      | YES  |     | NULL    |                | 
+| PublicationYear       | varchar(4)    | YES  |     | NULL    |                | 
+| NumberOfVolumes       | int(10)       | YES  |     | NULL    |                | 
+| TextPublisherID       | int(10)       | YES  | MUL | NULL    |                | 
+| TextProductionScaleID | int(10)       | YES  | MUL | NULL    |                | 
+| LocationID            | int(10)       | YES  |     | NULL    |                | 
+| Gen_Comments          | int(10)       | YES  |     | NULL    |                | 
+| s_ColLineage          | longblob      | YES  |     | NULL    |                | 
+| s_Generation          | int(10)       | YES  | MUL | NULL    |                | 
+| s_GUID                | varchar(36)   | YES  | MUL | NULL    |                | 
+| s_Lineage             | longblob      | YES  |     | NULL    |                | 
+| Date_Created          | datetime      | YES  |     | NULL    |                | 
+| Created_By            | int(10)       | YES  |     | NULL    |                | 
+| Last_Update_Date      | datetime      | YES  |     | NULL    |                | 
+| Updated_By            | int(10)       | YES  |     | NULL    |                | 
+| Title                 | varchar(255)  | YES  |     | NULL    |                | 
++-----------------------+---------------+------+-----+---------+----------------+
+
+TABLE tbltype, SIZE = 46
++------------------+--------------+------+-----+---------+----------------+
+| Field            | Type         | Null | Key | Default | Extra          |
++------------------+--------------+------+-----+---------+----------------+
+| TypeID           | int(10)      | NO   | PRI | NULL    | auto_increment | 
+| TableName        | varchar(50)  | YES  |     | NULL    |                | 
+| FieldName        | varchar(50)  | YES  |     | NULL    |                | 
+| DomainName       | varchar(100) | YES  |     | NULL    |                | 
+| DisplayOrder     | smallint(5)  | YES  |     | NULL    |                | 
+| LocationID       | int(10)      | YES  |     | NULL    |                | 
+| s_ColLineage     | longblob     | YES  |     | NULL    |                | 
+| s_Generation     | int(10)      | YES  | MUL | NULL    |                | 
+| s_GUID           | varchar(36)  | YES  | MUL | NULL    |                | 
+| s_Lineage        | longblob     | YES  |     | NULL    |                | 
+| Date_Created     | datetime     | YES  |     | NULL    |                | 
+| Created_By       | int(10)      | YES  |     | NULL    |                | 
+| Last_Update_Date | datetime     | YES  |     | NULL    |                | 
+| Updated_By       | int(10)      | YES  |     | NULL    |                | 
++------------------+--------------+------+-----+---------+----------------+
+
