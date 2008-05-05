@@ -1,3 +1,9 @@
+-- The following code is used to compute pairs of popular works and find how many
+-- readers have read both works.
+--
+-- For efficiency, tables are created along the way to store and view partial 
+-- results.
+
 drop table loans;
 create table loans
 	select
@@ -61,6 +67,7 @@ create table pop_pair_counts as
 		WorkID1, WorkID2
 	;
 
+drop table pop_pair_all;
 create table pop_pair_all as
 	select
 		pop.WorkID1 as WorkID1,

@@ -1,0 +1,218 @@
++--------+--------+-----------+---------------------------------------------------------+---------------------------------------------------------+
+| Count1 | Count2 | BothCount | Title                                                   | Title                                                   |
++--------+--------+-----------+---------------------------------------------------------+---------------------------------------------------------+
+|    115 |    101 |         4 | Our New Selection!                                      | War-Trail, The                                          | 
+|    101 |    110 |         4 | War-Trail, The                                          | Master of Men                                           | 
+|    115 |    125 |         1 | Our New Selection!                                      | Life for a Life, A                                      | 
+|    110 |    125 |         1 | Master of Men                                           | Life for a Life, A                                      | 
+|    115 |    125 |         1 | Our New Selection!                                      | Two Years Ago                                           | 
+|    110 |    125 |         2 | Master of Men                                           | Two Years Ago                                           | 
+|    101 |    112 |         2 | War-Trail, The                                          | On Our Selection                                        | 
+|    125 |    112 |         1 | Two Years Ago                                           | On Our Selection                                        | 
+|    143 |    100 |         4 | All the Year Round                                      | Scalp-Hunters, The                                      | 
+|    101 |    105 |         1 | War-Trail, The                                          | Glengarry Days                                          | 
+|    143 |    105 |         1 | All the Year Round                                      | Glengarry Days                                          | 
+|    125 |    105 |         1 | Life for a Life, A                                      | Glengarry Days                                          | 
+|    105 |    101 |         1 | Glengarry Days                                          | History of England, The; from the Accession of James II | 
+|    101 |    114 |         2 | War-Trail, The                                          | Doctor of Crow's Nest, The                              | 
+|    143 |    114 |         2 | All the Year Round                                      | Doctor of Crow's Nest, The                              | 
+|    125 |    114 |         1 | Life for a Life, A                                      | Doctor of Crow's Nest, The                              | 
+|    125 |    114 |         2 | Two Years Ago                                           | Doctor of Crow's Nest, The                              | 
+|    100 |    114 |         4 | Scalp-Hunters, The                                      | Doctor of Crow's Nest, The                              | 
+|    158 |    114 |         2 | Adam Bede                                               | Doctor of Crow's Nest, The                              | 
+|    101 |    107 |         1 | War-Trail, The                                          | Queen of the Rushes: A Tale of the Welsh Revival        | 
+|    125 |    107 |         1 | Two Years Ago                                           | Queen of the Rushes: A Tale of the Welsh Revival        | 
+|    100 |    107 |         3 | Scalp-Hunters, The                                      | Queen of the Rushes: A Tale of the Welsh Revival        | 
+|    158 |    107 |         3 | Adam Bede                                               | Queen of the Rushes: A Tale of the Welsh Revival        | 
+|    101 |    101 |         1 | War-Trail, The                                          | Anna the Adventuress                                    | 
+|    143 |    101 |         1 | All the Year Round                                      | Anna the Adventuress                                    | 
+|    125 |    101 |         1 | Life for a Life, A                                      | Anna the Adventuress                                    | 
+|    125 |    101 |         2 | Two Years Ago                                           | Anna the Adventuress                                    | 
+|    158 |    101 |         1 | Adam Bede                                               | Anna the Adventuress                                    | 
+|    101 |    121 |         2 | War-Trail, The                                          | Beatrice                                                | 
+|    125 |    121 |         1 | Two Years Ago                                           | Beatrice                                                | 
+|    100 |    121 |         3 | Scalp-Hunters, The                                      | Beatrice                                                | 
+|    115 |    101 |         3 | Our New Selection!                                      | Beau Brocade                                            | 
+|    101 |    101 |         1 | War-Trail, The                                          | Beau Brocade                                            | 
+|    125 |    101 |         1 | Life for a Life, A                                      | Beau Brocade                                            | 
+|    100 |    101 |         4 | Scalp-Hunters, The                                      | Beau Brocade                                            | 
+|    101 |    102 |         3 | War-Trail, The                                          | Betrayal, The                                           | 
+|    125 |    102 |         1 | Two Years Ago                                           | Betrayal, The                                           | 
+|    143 |    107 |         1 | All the Year Round                                      | Black Rock                                              | 
+|    125 |    107 |         1 | Two Years Ago                                           | Black Rock                                              | 
+|    100 |    107 |         4 | Scalp-Hunters, The                                      | Black Rock                                              | 
+|    158 |    107 |         3 | Adam Bede                                               | Black Rock                                              | 
+|    101 |    125 |         1 | War-Trail, The                                          | Brothers, The: The True History of a Fight Against Odds | 
+|    125 |    125 |         3 | Two Years Ago                                           | Brothers, The: The True History of a Fight Against Odds | 
+|    100 |    125 |         4 | Scalp-Hunters, The                                      | Brothers, The: The True History of a Fight Against Odds | 
+|    158 |    125 |         4 | Adam Bede                                               | Brothers, The: The True History of a Fight Against Odds | 
+|    110 |    114 |         1 | Master of Men                                           | Mill on the Floss, The                                  | 
+|    112 |    114 |         1 | On Our Selection                                        | Mill on the Floss, The                                  | 
+|    105 |    114 |         1 | Glengarry Days                                          | Mill on the Floss, The                                  | 
+|    114 |    114 |         1 | Doctor of Crow's Nest, The                              | Mill on the Floss, The                                  | 
+|    107 |    114 |         2 | Queen of the Rushes: A Tale of the Welsh Revival        | Mill on the Floss, The                                  | 
+|    121 |    114 |         2 | Beatrice                                                | Mill on the Floss, The                                  | 
+|    101 |    114 |         2 | Beau Brocade                                            | Mill on the Floss, The                                  | 
+|    102 |    114 |         2 | Betrayal, The                                           | Mill on the Floss, The                                  | 
+|    107 |    114 |         3 | Black Rock                                              | Mill on the Floss, The                                  | 
+|    125 |    114 |         1 | Brothers, The: The True History of a Fight Against Odds | Mill on the Floss, The                                  | 
+|    101 |    100 |         2 | War-Trail, The                                          | Esau                                                    | 
+|    143 |    100 |         1 | All the Year Round                                      | Esau                                                    | 
+|    125 |    100 |         2 | Two Years Ago                                           | Esau                                                    | 
+|    100 |    100 |         2 | Scalp-Hunters, The                                      | Esau                                                    | 
+|    101 |    149 |         1 | War-Trail, The                                          | Gambler, The                                            | 
+|    125 |    149 |         1 | Life for a Life, A                                      | Gambler, The                                            | 
+|    125 |    149 |         1 | Two Years Ago                                           | Gambler, The                                            | 
+|    158 |    149 |         2 | Adam Bede                                               | Gambler, The                                            | 
+|    114 |    149 |         1 | Mill on the Floss, The                                  | Gambler, The                                            | 
+|    110 |    123 |         1 | Master of Men                                           | Geoffrey Hamlyn                                         | 
+|    105 |    123 |         4 | Glengarry Days                                          | Geoffrey Hamlyn                                         | 
+|    114 |    123 |         2 | Doctor of Crow's Nest, The                              | Geoffrey Hamlyn                                         | 
+|    107 |    123 |         4 | Queen of the Rushes: A Tale of the Welsh Revival        | Geoffrey Hamlyn                                         | 
+|    101 |    123 |         2 | Anna the Adventuress                                    | Geoffrey Hamlyn                                         | 
+|    125 |    121 |         1 | Life for a Life, A                                      | Lest We Forget                                          | 
+|    100 |    121 |         2 | Scalp-Hunters, The                                      | Lest We Forget                                          | 
+|    114 |    121 |         1 | Mill on the Floss, The                                  | Lest We Forget                                          | 
+|    101 |    132 |         1 | War-Trail, The                                          | Welsh Witch, A                                          | 
+|    125 |    132 |         1 | Two Years Ago                                           | Welsh Witch, A                                          | 
+|    101 |    132 |         1 | History of England, The; from the Accession of James II | Welsh Witch, A                                          | 
+|    114 |    132 |         3 | Mill on the Floss, The                                  | Welsh Witch, A                                          | 
+|    123 |    132 |         4 | Geoffrey Hamlyn                                         | Welsh Witch, A                                          | 
+|    101 |    105 |         1 | War-Trail, The                                          | Mrs Wiggs of the Cabbage Patch                          | 
+|    143 |    105 |         1 | All the Year Round                                      | Mrs Wiggs of the Cabbage Patch                          | 
+|    100 |    105 |         3 | Scalp-Hunters, The                                      | Mrs Wiggs of the Cabbage Patch                          | 
+|    114 |    105 |         2 | Mill on the Floss, The                                  | Mrs Wiggs of the Cabbage Patch                          | 
+|    101 |    119 |         2 | War-Trail, The                                          | On the Wings of the Wind                                | 
+|    125 |    119 |         1 | Life for a Life, A                                      | On the Wings of the Wind                                | 
+|    125 |    119 |         2 | Two Years Ago                                           | On the Wings of the Wind                                | 
+|    100 |    119 |         3 | Scalp-Hunters, The                                      | On the Wings of the Wind                                | 
+|    101 |    127 |         3 | War-Trail, The                                          | Prince of Sinners, A                                    | 
+|    143 |    127 |         2 | All the Year Round                                      | Prince of Sinners, A                                    | 
+|    125 |    127 |         1 | Life for a Life, A                                      | Prince of Sinners, A                                    | 
+|    125 |    127 |         1 | Two Years Ago                                           | Prince of Sinners, A                                    | 
+|    114 |    127 |         1 | Mill on the Floss, The                                  | Prince of Sinners, A                                    | 
+|    110 |    161 |         2 | Master of Men                                           | Woman in White, The                                     | 
+|    114 |    161 |         3 | Doctor of Crow's Nest, The                              | Woman in White, The                                     | 
+|    107 |    161 |         2 | Queen of the Rushes: A Tale of the Welsh Revival        | Woman in White, The                                     | 
+|    101 |    161 |         3 | Anna the Adventuress                                    | Woman in White, The                                     | 
+|    102 |    161 |         2 | Betrayal, The                                           | Woman in White, The                                     | 
+|    127 |    161 |         3 | Prince of Sinners, A                                    | Woman in White, The                                     | 
+|    101 |    111 |         3 | War-Trail, The                                          | Smoking Flax                                            | 
+|    143 |    111 |         2 | All the Year Round                                      | Smoking Flax                                            | 
+|    125 |    111 |         1 | Life for a Life, A                                      | Smoking Flax                                            | 
+|    158 |    111 |         4 | Adam Bede                                               | Smoking Flax                                            | 
+|    123 |    111 |         2 | Geoffrey Hamlyn                                         | Smoking Flax                                            | 
+|    161 |    111 |         4 | Woman in White, The                                     | Smoking Flax                                            | 
+|    101 |    122 |         2 | War-Trail, The                                          | Sorrows of Satan, The                                   | 
+|    125 |    122 |         1 | Life for a Life, A                                      | Sorrows of Satan, The                                   | 
+|    100 |    122 |         2 | Scalp-Hunters, The                                      | Sorrows of Satan, The                                   | 
+|    123 |    122 |         4 | Geoffrey Hamlyn                                         | Sorrows of Satan, The                                   | 
+|    101 |    106 |         1 | War-Trail, The                                          | Story of Andrew Fairfax, The                            | 
+|    143 |    106 |         1 | All the Year Round                                      | Story of Andrew Fairfax, The                            | 
+|    125 |    106 |         1 | Two Years Ago                                           | Story of Andrew Fairfax, The                            | 
+|    100 |    106 |         2 | Scalp-Hunters, The                                      | Story of Andrew Fairfax, The                            | 
+|    101 |    119 |         2 | War-Trail, The                                          | Thelma                                                  | 
+|    143 |    119 |         2 | All the Year Round                                      | Thelma                                                  | 
+|    125 |    119 |         2 | Two Years Ago                                           | Thelma                                                  | 
+|    100 |    119 |         2 | Scalp-Hunters, The                                      | Thelma                                                  | 
+|    101 |    119 |         4 | Beau Brocade                                            | Thelma                                                  | 
+|    105 |    121 |         1 | Glengarry Days                                          | Tom Brown's Schooldays                                  | 
+|    114 |    121 |         1 | Doctor of Crow's Nest, The                              | Tom Brown's Schooldays                                  | 
+|    107 |    121 |         3 | Queen of the Rushes: A Tale of the Welsh Revival        | Tom Brown's Schooldays                                  | 
+|    101 |    121 |         1 | Anna the Adventuress                                    | Tom Brown's Schooldays                                  | 
+|    100 |    121 |         1 | Esau                                                    | Tom Brown's Schooldays                                  | 
+|    149 |    121 |         2 | Gambler, The                                            | Tom Brown's Schooldays                                  | 
+|    105 |    121 |         1 | Mrs Wiggs of the Cabbage Patch                          | Tom Brown's Schooldays                                  | 
+|    111 |    121 |         1 | Smoking Flax                                            | Tom Brown's Schooldays                                  | 
+|    122 |    121 |         1 | Sorrows of Satan, The                                   | Tom Brown's Schooldays                                  | 
+|    119 |    121 |         2 | Thelma                                                  | Tom Brown's Schooldays                                  | 
+|    100 |    124 |         2 | Scalp-Hunters, The                                      | Within the Maze                                         | 
+|    101 |    124 |         2 | Beau Brocade                                            | Within the Maze                                         | 
+|    101 |    116 |         3 | War-Trail, The                                          | God's Good Man: A Simple Love-Story                     | 
+|    143 |    116 |         2 | All the Year Round                                      | God's Good Man: A Simple Love-Story                     | 
+|    125 |    116 |         3 | Two Years Ago                                           | God's Good Man: A Simple Love-Story                     | 
+|    100 |    116 |         3 | Scalp-Hunters, The                                      | God's Good Man: A Simple Love-Story                     | 
+|    121 |    116 |         1 | Tom Brown's Schooldays                                  | God's Good Man: A Simple Love-Story                     | 
+|    101 |    112 |         4 | War-Trail, The                                          | Adventures of Sherlock Holmes, The                      | 
+|    158 |    112 |         3 | Adam Bede                                               | Adventures of Sherlock Holmes, The                      | 
+|    114 |    112 |         1 | Mill on the Floss, The                                  | Adventures of Sherlock Holmes, The                      | 
+|    123 |    112 |         3 | Geoffrey Hamlyn                                         | Adventures of Sherlock Holmes, The                      | 
+|    101 |    124 |         4 | War-Trail, The                                          | Dublin University Magazine, The                         | 
+|    110 |    121 |         4 | Master of Men                                           | Wilson's Tales of the Borders                           | 
+|    112 |    121 |         4 | On Our Selection                                        | Wilson's Tales of the Borders                           | 
+|    114 |    121 |         4 | Doctor of Crow's Nest, The                              | Wilson's Tales of the Borders                           | 
+|    107 |    121 |         2 | Queen of the Rushes: A Tale of the Welsh Revival        | Wilson's Tales of the Borders                           | 
+|    121 |    121 |         2 | Beatrice                                                | Wilson's Tales of the Borders                           | 
+|    125 |    121 |         4 | Brothers, The: The True History of a Fight Against Odds | Wilson's Tales of the Borders                           | 
+|    114 |    121 |         4 | Mill on the Floss, The                                  | Wilson's Tales of the Borders                           | 
+|    121 |    121 |         3 | Lest We Forget                                          | Wilson's Tales of the Borders                           | 
+|    105 |    121 |         1 | Mrs Wiggs of the Cabbage Patch                          | Wilson's Tales of the Borders                           | 
+|    122 |    121 |         3 | Sorrows of Satan, The                                   | Wilson's Tales of the Borders                           | 
+|    116 |    121 |         3 | God's Good Man: A Simple Love-Story                     | Wilson's Tales of the Borders                           | 
+|    112 |    121 |         4 | Adventures of Sherlock Holmes, The                      | Wilson's Tales of the Borders                           | 
+|    105 |    704 |         2 | Glengarry Days                                          | Unknown                                                 | 
+|    121 |    704 |         4 | Beatrice                                                | Unknown                                                 | 
+|    107 |    704 |         2 | Black Rock                                              | Unknown                                                 | 
+|    132 |    704 |         3 | Welsh Witch, A                                          | Unknown                                                 | 
+|    105 |    704 |         2 | Mrs Wiggs of the Cabbage Patch                          | Unknown                                                 | 
+|    106 |    704 |         3 | Story of Andrew Fairfax, The                            | Unknown                                                 | 
+|    112 |    704 |         2 | Adventures of Sherlock Holmes, The                      | Unknown                                                 | 
+|    101 |    101 |         1 | War-Trail, The                                          | Man on the Box, The                                     | 
+|    125 |    101 |         1 | Two Years Ago                                           | Man on the Box, The                                     | 
+|    100 |    101 |         4 | Scalp-Hunters, The                                      | Man on the Box, The                                     | 
+|    158 |    101 |         4 | Adam Bede                                               | Man on the Box, The                                     | 
+|    114 |    101 |         1 | Mill on the Floss, The                                  | Man on the Box, The                                     | 
+|    115 |    203 |         1 | Our New Selection!                                      | Waverley                                                | 
+|    114 |    203 |         1 | Doctor of Crow's Nest, The                              | Waverley                                                | 
+|    107 |    203 |         1 | Queen of the Rushes: A Tale of the Welsh Revival        | Waverley                                                | 
+|    101 |    203 |         1 | Anna the Adventuress                                    | Waverley                                                | 
+|    121 |    203 |         1 | Beatrice                                                | Waverley                                                | 
+|    101 |    203 |         1 | Beau Brocade                                            | Waverley                                                | 
+|    102 |    203 |         1 | Betrayal, The                                           | Waverley                                                | 
+|    125 |    203 |         1 | Brothers, The: The True History of a Fight Against Odds | Waverley                                                | 
+|    100 |    203 |         1 | Esau                                                    | Waverley                                                | 
+|    149 |    203 |         1 | Gambler, The                                            | Waverley                                                | 
+|    132 |    203 |         1 | Welsh Witch, A                                          | Waverley                                                | 
+|    119 |    203 |         1 | On the Wings of the Wind                                | Waverley                                                | 
+|    127 |    203 |         1 | Prince of Sinners, A                                    | Waverley                                                | 
+|    122 |    203 |         1 | Sorrows of Satan, The                                   | Waverley                                                | 
+|    106 |    203 |         1 | Story of Andrew Fairfax, The                            | Waverley                                                | 
+|    112 |    203 |         1 | Adventures of Sherlock Holmes, The                      | Waverley                                                | 
+|    101 |    203 |         1 | Man on the Box, The                                     | Waverley                                                | 
+|    105 |    232 |         1 | Glengarry Days                                          | What Will He Do with It?                                | 
+|    114 |    232 |         1 | Doctor of Crow's Nest, The                              | What Will He Do with It?                                | 
+|    101 |    232 |         1 | Anna the Adventuress                                    | What Will He Do with It?                                | 
+|    100 |    232 |         1 | Esau                                                    | What Will He Do with It?                                | 
+|    111 |    232 |         1 | Smoking Flax                                            | What Will He Do with It?                                | 
+|    119 |    232 |         1 | Thelma                                                  | What Will He Do with It?                                | 
+|    116 |    232 |         1 | God's Good Man: A Simple Love-Story                     | What Will He Do with It?                                | 
+|    101 |    137 |         2 | War-Trail, The                                          | Blackwoods Edinburgh Magazine                           | 
+|    115 |    114 |         2 | Our New Selection!                                      | Scenes of Clerical Life                                 | 
+|    112 |    114 |         4 | On Our Selection                                        | Scenes of Clerical Life                                 | 
+|    105 |    114 |         2 | Glengarry Days                                          | Scenes of Clerical Life                                 | 
+|    107 |    114 |         2 | Queen of the Rushes: A Tale of the Welsh Revival        | Scenes of Clerical Life                                 | 
+|    101 |    114 |         1 | Anna the Adventuress                                    | Scenes of Clerical Life                                 | 
+|    107 |    114 |         3 | Black Rock                                              | Scenes of Clerical Life                                 | 
+|    125 |    114 |         2 | Brothers, The: The True History of a Fight Against Odds | Scenes of Clerical Life                                 | 
+|    100 |    114 |         3 | Esau                                                    | Scenes of Clerical Life                                 | 
+|    149 |    114 |         2 | Gambler, The                                            | Scenes of Clerical Life                                 | 
+|    121 |    114 |         4 | Lest We Forget                                          | Scenes of Clerical Life                                 | 
+|    132 |    114 |         3 | Welsh Witch, A                                          | Scenes of Clerical Life                                 | 
+|    105 |    114 |         1 | Mrs Wiggs of the Cabbage Patch                          | Scenes of Clerical Life                                 | 
+|    119 |    114 |         2 | On the Wings of the Wind                                | Scenes of Clerical Life                                 | 
+|    111 |    114 |         2 | Smoking Flax                                            | Scenes of Clerical Life                                 | 
+|    106 |    114 |         3 | Story of Andrew Fairfax, The                            | Scenes of Clerical Life                                 | 
+|    124 |    114 |         4 | Within the Maze                                         | Scenes of Clerical Life                                 | 
+|    116 |    114 |         4 | God's Good Man: A Simple Love-Story                     | Scenes of Clerical Life                                 | 
+|    101 |    114 |         3 | Man on the Box, The                                     | Scenes of Clerical Life                                 | 
+|    101 |    128 |         2 | War-Trail, The                                          | Little Shepherd of Kingdom Come, The                    | 
+|    125 |    128 |         1 | Life for a Life, A                                      | Little Shepherd of Kingdom Come, The                    | 
+|    125 |    128 |         3 | Two Years Ago                                           | Little Shepherd of Kingdom Come, The                    | 
+|    114 |    128 |         1 | Mill on the Floss, The                                  | Little Shepherd of Kingdom Come, The                    | 
+|    123 |    128 |         4 | Geoffrey Hamlyn                                         | Little Shepherd of Kingdom Come, The                    | 
+|    121 |    128 |         1 | Tom Brown's Schooldays                                  | Little Shepherd of Kingdom Come, The                    | 
+|    203 |    128 |         1 | Waverley                                                | Little Shepherd of Kingdom Come, The                    | 
+|    232 |    128 |         1 | What Will He Do with It?                                | Little Shepherd of Kingdom Come, The                    | 
++--------+--------+-----------+---------------------------------------------------------+---------------------------------------------------------+
+212 rows in set (0.01 sec)
+
