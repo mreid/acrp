@@ -11,6 +11,12 @@ of this type can be further analysed to see whether certain books predict the
 reading of A or B and whether reading is clustered that can be understood 
 via reader's occupation, genre, gender, etc.
 
+Set up
+------
+Several tables are created during analysis so as to speed things up. Once the
+original ACRP database is loaded, run `split_pairs.sql` to build the extra
+tables required before running `analysis.sql`.
+
 Configuration
 -------------
 By default, the SQL mode in TextMate expects the file `/tmp/mysql.sock` to
