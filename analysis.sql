@@ -1,3 +1,7 @@
+select count(*) from (select distinct BorrowerID from pop_loans) as borrowers; 
+
+select count(*) from (select distinct BorrowerID from pop_loans where WorkID = 3564) as borrowers;
+
 select 
 	Count1, Count2, BothCount, 
 	2 * BothCount / (Count1 + Count2) as Prob
