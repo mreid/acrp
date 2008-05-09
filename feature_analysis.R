@@ -5,25 +5,28 @@ m <- dbDriver("MySQL")
 con <- dbConnect(m, db="acrp", user="acrp", password="acrppass", client.flag = CLIENT_MULTI_STATEMENTS)
 
 # Get all the IDs of borrowers of popular books
-rs <- dbSendQuery(con, "select distinct BorrowerID from pop_loans")
-borrowerIDs <- fetch(rs)
-dbClearResult(rs)
+borrowerIDs <- dbGetQuery(con, "select distinct BorrowerID from pop_loans")
 
 # Get all the IDs of the popular books
-rs <- dbSendQuery(con, "select distinct WorkID from pop_loans")
-workIDs <- fetch(rs)
-dbClearResult(rs)
+workIDs <- dbGetQuery(con, "select distinct WorkID from pop_loans")
 
-docs <- data.frame()
-script <- c()
-for(w in workIDs) {
-	script <- append(script, getBorrowers(w))
-}
-print(paste(script, sep=";"))
-
-getBorrowers <- function(workID) {
-	paste(
-		"select distinct BorrowerID from pop_loans", 
-		"where WorkID =", workID
+getBorrowers <- function(borrowerID) {
+	query <- paste(
+		"select distinct WorkID from pop_loans", 
+		"where BorrowerID =", borrowerID
 	)
+	bs <- dbGetQuery(con, query)
+}
+
+docs <- data.frame(row.names = workIDs[[1]])
+for(b in borrowerIDs[[1]]) {
+	wIDs <- getBorrowers(b)
+	print(sprintf("BorrowerID = %d: %d", b, length(wIDs[[1]])))
+
+	ws <- rep(0, length(workIDs[[1]]))
+	for(w in wIDs[[1]]) {
+		
+	}
+	docs <- rbind(docs,data.frame(bs))
+	docs[[as.character(b)]] 
 }
