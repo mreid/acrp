@@ -30,20 +30,22 @@ getBorrowers <- function(workID) {
 docs <- data.frame(row.names = workIDs[[1]])
 mean <- rep(0, length(workIDs[[1]]))
 for(b in borrowerIDs[[1]]) {
-	wIDs <- getWorks(b)
-	print(sprintf("BorrowerID = %d: %d", b, length(wIDs[[1]])))
+	if(!is.na(b)) {
+		wIDs <- getWorks(b)
+		print(sprintf("BorrowerID = %d: %d", b, length(wIDs[[1]])))
 
-	ws <- rep(0, length(workIDs[[1]]))
-	num <- 0
-	for(w in wIDs[[1]]) {
-		idx <- which(workIDs == w)
-		if(idx != 0) {
-			ws[[idx[[1]]]] <- 1
-			num <- num + 1
+		ws <- rep(0, length(workIDs[[1]]))
+		num <- 0
+		for(w in wIDs[[1]]) {
+			idx <- which(workIDs == w)
+			if(idx != 0) {
+				ws[[idx[[1]]]] <- 1
+				num <- num + 1
+			}
 		}
+		docs[[as.character(b)]] <- ws #/ num
+		mean <- mean + ws / num
 	}
-	docs[[as.character(b)]] <- ws #/ num
-	mean <- mean + ws / num
 }
 #mean <- mean / length(borrowerIDs[[1]])
 #for(idx in 1:(length(docs[[1]]))) {
