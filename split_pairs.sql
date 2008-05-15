@@ -10,7 +10,8 @@ create table loans
 		work.LitWorkID			as WorkID,
 		vol.ReadVolCopyID		as VolID,
 		loan.ReadLoanIssueID 	as LoanID,
-		loan.ReadBorrowerID		as BorrowerID
+		loan.ReadBorrowerID		as BorrowerID,
+		vol.ReadLibraryID		as LibraryID
 	from 
 		tbllitwork			as work
 		inner join tblreadvolcopy as vol on work.LitWorkID = vol.LitWorkID
@@ -34,7 +35,8 @@ drop table pop_loans;
 create table pop_loans
 	select distinct
 		popular_works.WorkID as WorkID,
-		loans.BorrowerID as BorrowerID
+		loans.BorrowerID as BorrowerID,
+		loans.LibraryID as LibraryID
 	from 
 		popular_works,
 		loans

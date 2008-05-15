@@ -7,6 +7,15 @@ select distinct BorrowerID from pop_loans where WorkID = 1134294745;
 select distinct BorrowerID from pop_loans where WorkID = 1112933613;
 
 select 
+	popular_works.WorkID, 
+	pop_loans.LibraryID 
+from 
+	popular_works 
+	left join pop_loans 
+	on popular_works.WorkID = pop_loans.WorkID 
+group by popular_works.WorkID;
+
+select 
 	Count1, Count2, BothCount, 
 	2 * BothCount / (Count1 + Count2) as Prob
 from
