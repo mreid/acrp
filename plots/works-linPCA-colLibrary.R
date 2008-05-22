@@ -65,6 +65,6 @@ for(b in borrowerIDs[[1]]) {
 kpc <- kpca(~., data=docs,kernel=vanilladot,kpar=list(),features=2)
 plot(rotated(kpc), 
 	xlab="Borrower PC 1", ylab="Borrower PC 2", 
-	main="Linear PCA of Books by Borrowers\nMaitland Institute",
+	main="Linear PCA of Books by Borrowers\nColoured by Library",
 	col=sapply(workIDs[[2]], function(x) {x %% 14})
 )

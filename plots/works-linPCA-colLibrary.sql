@@ -15,9 +15,7 @@ create table loans
 	from 
 		tbllitwork			as work
 		inner join tblreadvolcopy as vol on work.LitWorkID = vol.LitWorkID
-		inner join tblreadloanissue as loan on vol.ReadVolCopyID = loan.ReadVolCopyID
-	where
-		vol.ReadLibraryID = 1108618849;
+		inner join tblreadloanissue as loan on vol.ReadVolCopyID = loan.ReadVolCopyID;
 
 drop table workcounts;
 create table workcounts

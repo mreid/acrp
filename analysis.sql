@@ -7,6 +7,14 @@ select distinct BorrowerID from pop_loans where WorkID = 1134294745;
 select distinct BorrowerID from pop_loans where WorkID = 1112933613;
 
 select 
+	LibraryID, 
+	count(WorkID) as Count
+from 
+	pop_loans
+group by 
+	LibraryID;
+
+select 
 	popular_works.WorkID, 
 	pop_loans.LibraryID 
 from 
