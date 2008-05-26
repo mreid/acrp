@@ -1,3 +1,9 @@
+# Analysis of Books as vectors of Borrowers
+#
+# TODO
+# ----
+# [_] Double check that when using `kpca` that rows correspond to instances.
+ 
 library(RMySQL)
 library(kernlab)
 
@@ -17,15 +23,18 @@ workIDs <- dbGetQuery(con,
 from 
 	popular_works, pop_loans, tbllitwork
 where 
+	pop_loans.LibraryID = 2 and
 	popular_works.WorkID = pop_loans.WorkID and
 	popular_works.WorkID = tbllitwork.LitWorkID
-group by 
+group by
 	popular_works.WorkID"
 )
 numWorks <- length(workIDs$WorkID)
 
 # Get all the IDs of borrowers of popular books
-borrowerIDs <- dbGetQuery(con, "select distinct BorrowerID from pop_loans")
+borrowerIDs <- dbGetQuery(con, 
+	"select distinct BorrowerID from pop_loans where LibraryID = 2"
+)
 numBorrowers <- length(borrowerIDs$BorrowerID)
 
 getWorks <- function(borrowerID) {
@@ -50,29 +59,47 @@ for(b in borrowerIDs$BorrowerID) {
 		cat("BorrowerID = ", b, " read ", numWorksRead, " book(s)\n")
 	}
 
-	ws <- as.numeric(workIDs$WorkID %in% wIDs)
-	docs[,bidx] <- sqrt(ws / sum(ws))
+	docs[,bidx] <- as.numeric(workIDs$WorkID %in% wIDs)
+#	ws <- as.numeric(workIDs$WorkID %in% wIDs)
+#	docs[,bidx] <- if(sum(ws) == 0) { 0 } else { sqrt(ws / sum(ws)) }
 }
 
+# Normalise the rows (books)
+ndocs <- t(apply(docs, 1, function(row) { sqrt(row / sum(row)) }))
+
+# Normalise the columns (borrowers)
+#ndocs <- apply(docs, 2, function(col) { s = sum(col); if(s == 0) { col } else { sqrt(col / s) }})
+
 # Compute the number of borrowers of each book
-borrowCounts <- workInfo$NumBorrowers
+borrowCounts <- workIDs$NumBorrowers
 borrowCounts <- borrowCounts / mean(borrowCounts)
 
-kpc <- kpca(docs,kernel=vanilladot,kpar=list(),features=2)
+neighbours <- docs %*% t(docs)
+
+#nr <- dim(ndocs)[1]
+#centerer <- diag(1, nr, nr) - 1/nr * (rep(1,nr) %*% t(rep(1,nr)))
+#cdocs <- centerer %*% ndocs
+
+kpc <- kpca(ndocs,kernel=rbfdot,kpar=list(sigma=1),features=2);
+#kpc <- kpca(ndocs,kernel=vanilladot,kpar=list(),features=2);
 xys <- rotated(kpc)
 workIDs$x <- xys[,1]
 workIDs$y <- xys[,2]
 
-write.csv(workIDs, "/tmp/test.csv")
+# write.csv(workIDs, "/tmp/test.csv", row.names=FALSE)
 
 plot(xys, 
 	xlab="Borrower PC 1", ylab="Borrower PC 2", 
-	main="Linear PCA of Books by Borrowers\nMaitland Institute",
+	main="Linear PCA of Books by Borrowers\nLambton Institute",
 	col=sapply(workIDs$LibraryID, function(x) {x %% 14}),
 	cex=borrowCounts
 )
 
 # Put some titles on the plot, chosen at random
-s <- sample(workIDs$Title, 10)
+#s <- c("On Our Selection", "Master of Men", "Missionary, The", "Prince of Sinners, A", "Tempter's Power, The", "Our New Selection!", "Back at Our Selection", "Connie Burt", "Town and Bush") #sample(workIDs$Title, 10)
+s <- c("On Our Selection", "Southerners, The", "Little Shepherd of Kingdom Come, The", "Master of Men", "Missionary, The", "Prince of Sinners, A", "Tempter's Power, The", "Our New Selection!") #sample(workIDs$Title, 10)
 titles <- sapply(workIDs$Title, function(x) { if(x %in% s) { x } else {""} })
-text(xys[,1], xys[,2], titles, cex=0.7, pos=4)
+text(xys[,1], xys[,2], titles, cex=0.7, pos=1)
+
+# TODO: Pick a book (On Our Selection) and draw lines to neighbours
+
