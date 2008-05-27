@@ -23,7 +23,7 @@ workIDs <- dbGetQuery(con,
 from 
 	popular_works, pop_loans, tbllitwork
 where 
-	pop_loans.LibraryID = 2 and
+	pop_loans.LibraryID != 0 and
 	popular_works.WorkID = pop_loans.WorkID and
 	popular_works.WorkID = tbllitwork.LitWorkID
 group by
@@ -33,7 +33,7 @@ numWorks <- length(workIDs$WorkID)
 
 # Get all the IDs of borrowers of popular books
 borrowerIDs <- dbGetQuery(con, 
-	"select distinct BorrowerID from pop_loans where LibraryID = 2"
+	"select distinct BorrowerID from pop_loans where LibraryID != 0"
 )
 numBorrowers <- length(borrowerIDs$BorrowerID)
 
@@ -66,11 +66,11 @@ for(b in borrowerIDs$BorrowerID) {
 
 # No normalisation
 # Similarity represents total number of borrowers in common
-ndocs <- docs
+#ndocs <- docs
 
 # Normalise the rows (books)
 # Similarity represents proportion of borrowers in common
-#ndocs <- t(apply(docs, 1, function(row) { sqrt(row / sum(row)) }))
+ndocs <- t(apply(docs, 1, function(row) { sqrt(row / sum(row)) }))
 
 # Normalise the columns (borrowers)
 #ndocs <- apply(docs, 2, function(col) { s = sum(col); if(s == 0) { col } else { sqrt(col / s) }})
@@ -93,10 +93,14 @@ workIDs$y <- xys[,2]
 
 # write.csv(workIDs, "/tmp/test.csv", row.names=FALSE)
 
+libcolour <- function(libid) {
+	c("blue", "red", "", "green", "black", "", "", "orange", "gray")[libid %% 10]
+}
+
 plot(xys, 
 	xlab="Borrower PC 1", ylab="Borrower PC 2", 
 	main="Linear PCA of Books by Borrowers\nLambton Institute",
-	col=sapply(workIDs$LibraryID, function(x) {x %% 14}),
+	col=sapply(workIDs$LibraryID, libcolour),
 	cex=borrowCounts
 )
 
@@ -114,4 +118,4 @@ shownearby <- function(workID, threshold) {
 	}	
 }
 
-shownearby(777, 20)
+shownearby(154, 20)

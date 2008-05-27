@@ -47,6 +47,9 @@ class PlotView {
   
   float viewToModelX(float vx) { return xStart + xRange() * (vx - vxStart) / viewWidth(); }
   float viewToModelY(float vy) { return yStart - yRange() * (vy - vyEnd) / viewHeight(); }
+
+  float modelToViewX(float x) { return vxStart + viewWidth() * (x - xStart) / xRange(); }
+  float modelToViewY(float y) { return vyEnd - viewHeight() * (y - yStart) / yRange(); }
   
    boolean active() {
      return (mouseX > vxStart && mouseX < vxEnd && mouseY > vyStart && mouseY < vyEnd);
