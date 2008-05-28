@@ -1,10 +1,10 @@
-import processing.core.*; import controlP5.*; import au.com.bytecode.opencsv.*; import au.com.bytecode.opencsv.bean.*; import java.io.*; import java.util.Hashtable; import java.util.ArrayList; import java.util.Vector; import java.applet.*; import java.awt.*; import java.awt.image.*; import java.awt.event.*; import java.io.*; import java.net.*; import java.text.*; import java.util.*; import java.util.zip.*; import javax.sound.midi.*; import javax.sound.midi.spi.*; import javax.sound.sampled.*; import javax.sound.sampled.spi.*; import java.util.regex.*; import javax.xml.parsers.*; import javax.xml.transform.*; import javax.xml.transform.dom.*; import javax.xml.transform.sax.*; import javax.xml.transform.stream.*; import org.xml.sax.*; import org.xml.sax.ext.*; import org.xml.sax.helpers.*; public class vis extends PApplet {
+import processing.core.*; import controlP5.*; import au.com.bytecode.opencsv.*; import au.com.bytecode.opencsv.bean.*; import java.io.*; import java.util.Hashtable; import java.util.ArrayList; import java.util.Vector; import java.applet.*; import java.awt.*; import java.awt.image.*; import java.awt.event.*; import java.io.*; import java.net.*; import java.text.*; import java.util.*; import java.util.zip.*; public class vis extends PApplet {
 
 
 
 
-int readerThreshold = 0;
-float weightThreshold = 0.25f;
+public int readerThreshold = 0;
+public float weightThreshold = 0.25f;
 ArrayList active = new ArrayList();
 
 Graph graph;

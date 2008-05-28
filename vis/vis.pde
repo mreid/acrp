@@ -3,8 +3,8 @@ import au.com.bytecode.opencsv.*;
 import au.com.bytecode.opencsv.bean.*;
 import java.io.*;
 
-int readerThreshold = 0;
-float weightThreshold = 0.25;
+public int readerThreshold = 0;
+public float weightThreshold = 0.25;
 ArrayList active = new ArrayList();
 
 Graph graph;
