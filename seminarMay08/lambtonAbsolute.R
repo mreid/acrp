@@ -49,7 +49,7 @@ for(b in borrowerIDs$BorrowerID) {
 
 # Normalise the rows (books)
 # Similarity represents proportion of borrowers in common
-ndocs <- t(apply(docs, 1, function(row) { sqrt(row / sum(row)) }))
+ndocs <- docs
 
 # Compute the number of borrowers of each book
 borrowCounts <- workIDs$NumBorrowers
@@ -61,7 +61,7 @@ workIDs$x <- xys[,1]
 workIDs$y <- xys[,2]
 
 print("Writing out PCA coordinates\n")
-write.csv(workIDs, "../vis/data/lambton.csv", row.names=FALSE)
+write.csv(workIDs, "../vis/data/lambtonabs.csv", row.names=FALSE)
 
 plot(xys, 
 	main=paste("Linear PCA of", numWorks, " Books\nLambton Miners' and Mechanics' Institute"),
@@ -77,7 +77,7 @@ neighbours <- docs %*% t(docs)
 print("Writing out neighbourhood matrix...\n")
 write.csv(
 	cbind(workIDs$WorkID, neighbours), 
-	"../vis/data/lambton-neighbours.csv", 
+	"../vis/data/lambton-neighboursabs.csv", 
 	row.names=FALSE
 )
 print("Done!\n")

@@ -18,6 +18,8 @@ workIDs <- dbGetQuery(con,
 from 
 	popular_works, pop_loans, tbllitwork
 where 
+    popular_works.WorkID != -313835688 and
+    popular_works.WorkID != 3791 and
 	pop_loans.LibraryID = 2 and
 	popular_works.WorkID = pop_loans.WorkID and
 	popular_works.WorkID = tbllitwork.LitWorkID
@@ -28,7 +30,7 @@ numWorks <- length(workIDs$WorkID)
 
 # Get all the IDs of borrowers of popular books
 borrowerIDs <- dbGetQuery(con, 
-	"select distinct BorrowerID from pop_loans where LibraryID = 2"
+	"select distinct BorrowerID from pop_loans where LibraryID = 2 and WorkID != -313835688 and WorkID != 3791"
 )
 numBorrowers <- length(borrowerIDs$BorrowerID)
 
@@ -47,9 +49,8 @@ for(b in borrowerIDs$BorrowerID) {
 	if(bidx %% 10 == 0) { cat("Completed ", bidx, " of ", total, "\n") }
 }
 
-# Normalise the rows (books)
-# Similarity represents proportion of borrowers in common
-ndocs <- t(apply(docs, 1, function(row) { sqrt(row / sum(row)) }))
+# Normalise the columns (borrowers)
+ndocs <- apply(docs, 2, function(col) { s = sum(col); if(s == 0) { col } else { col / s }})
 
 # Compute the number of borrowers of each book
 borrowCounts <- workIDs$NumBorrowers
@@ -61,7 +62,7 @@ workIDs$x <- xys[,1]
 workIDs$y <- xys[,2]
 
 print("Writing out PCA coordinates\n")
-write.csv(workIDs, "../vis/data/lambton.csv", row.names=FALSE)
+write.csv(workIDs, "../vis/data/lambton_normborrow.csv", row.names=FALSE)
 
 plot(xys, 
 	main=paste("Linear PCA of", numWorks, " Books\nLambton Miners' and Mechanics' Institute"),
@@ -77,7 +78,7 @@ neighbours <- docs %*% t(docs)
 print("Writing out neighbourhood matrix...\n")
 write.csv(
 	cbind(workIDs$WorkID, neighbours), 
-	"../vis/data/lambton-neighbours.csv", 
+	"../vis/data/lambton-neighbours_normborrow.csv", 
 	row.names=FALSE
 )
 print("Done!\n")

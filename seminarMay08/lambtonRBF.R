@@ -55,13 +55,13 @@ ndocs <- t(apply(docs, 1, function(row) { sqrt(row / sum(row)) }))
 borrowCounts <- workIDs$NumBorrowers
 borrowCounts <- borrowCounts / mean(borrowCounts)
 
-kpc <- kpca(ndocs,kernel=vanilladot,kpar=list(),features=2);
+kpc <- kpca(ndocs,kernel=rbfdot,kpar=list(sigma=1.2),features=2);
 xys <- rotated(kpc)
 workIDs$x <- xys[,1]
 workIDs$y <- xys[,2]
 
 print("Writing out PCA coordinates\n")
-write.csv(workIDs, "../vis/data/lambton.csv", row.names=FALSE)
+write.csv(workIDs, "../vis/data/lambton_rbf.csv", row.names=FALSE)
 
 plot(xys, 
 	main=paste("Linear PCA of", numWorks, " Books\nLambton Miners' and Mechanics' Institute"),

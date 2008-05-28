@@ -1,9 +1,9 @@
-# Analysis of Books as vectors of Borrowers for the Lambton Library
+# Analysis of Books as vectors of Borrowers over all libraries.
 library(RMySQL)
 library(kernlab)
 
 m <- dbDriver("MySQL")
-con <- dbConnect(m, db="acrp", user="acrp", password="acrppass")
+con <- dbConnect(m, db="acrp", user="acrp", password="acrppass") #, client.flag = CLIENT_MULTI_STATEMENTS)
 
 # Get all the popular loans
 loans <- dbGetQuery(con, "select BorrowerID, WorkID from pop_loans")
@@ -18,7 +18,6 @@ workIDs <- dbGetQuery(con,
 from 
 	popular_works, pop_loans, tbllitwork
 where 
-	pop_loans.LibraryID = 2 and
 	popular_works.WorkID = pop_loans.WorkID and
 	popular_works.WorkID = tbllitwork.LitWorkID
 group by
@@ -27,9 +26,7 @@ group by
 numWorks <- length(workIDs$WorkID)
 
 # Get all the IDs of borrowers of popular books
-borrowerIDs <- dbGetQuery(con, 
-	"select distinct BorrowerID from pop_loans where LibraryID = 2"
-)
+borrowerIDs <- dbGetQuery(con, "select distinct BorrowerID from pop_loans")
 numBorrowers <- length(borrowerIDs$BorrowerID)
 
 getWorks <- function(borrowerID) { loans$WorkID[loans$BorrowerID == borrowerID] }
@@ -42,42 +39,37 @@ bidx <- 0
 for(b in borrowerIDs$BorrowerID) {
 	bidx <- bidx + 1
 	wIDs <- getWorks(b)
-	docs[,bidx] <- as.numeric(workIDs$WorkID %in% wIDs)
+	if(bidx %% 100 == 0) { cat("Completed ", bidx, " of ", total, "\n") }
+		
+	numWorksRead <- length(wIDs)
+	if(numWorksRead == 0) {
+		cat("BorrowerID = ", b, " read ", numWorksRead, " book(s)\n")
+	}
 
-	if(bidx %% 10 == 0) { cat("Completed ", bidx, " of ", total, "\n") }
+	docs[,bidx] <- as.numeric(workIDs$WorkID %in% wIDs)
 }
 
-# Normalise the rows (books)
-# Similarity represents proportion of borrowers in common
-ndocs <- t(apply(docs, 1, function(row) { sqrt(row / sum(row)) }))
+# No Normalisation of the rows (books)
+# Similarity represents absolute number of borrowers in common
+ndocs <- docs
 
 # Compute the number of borrowers of each book
 borrowCounts <- workIDs$NumBorrowers
 borrowCounts <- borrowCounts / mean(borrowCounts)
 
-kpc <- kpca(ndocs,kernel=vanilladot,kpar=list(),features=2);
+kpc <- kpca(ndocs,kernel=vanilladot,kpar=list(),features=2)
 xys <- rotated(kpc)
 workIDs$x <- xys[,1]
 workIDs$y <- xys[,2]
 
-print("Writing out PCA coordinates\n")
-write.csv(workIDs, "../vis/data/lambton.csv", row.names=FALSE)
+# Simple mapping from LibraryID to color with hand-chosen colours
+libcolour <- function(libid) {
+	c("blue", "red", "", "darkgreen", "black", "", "", "orange", "purple")[libid %% 10]
+}
 
 plot(xys, 
-	main=paste("Linear PCA of", numWorks, " Books\nLambton Miners' and Mechanics' Institute"),
-	col=2,
-	cex=borrowCounts,
-	xlab=NA, ylab=NA, 
-	xaxt="n", yaxt="n"
+	xlab="Borrower PC 1", ylab="Borrower PC 2", 
+	main=paste("Linear PCA of", numWorks, " Books\nColoured by Library"),
+	col=sapply(workIDs$LibraryID, libcolour),
+	cex=borrowCounts
 )
-
-print("Computing neighbourhood matrix...\n")
-neighbours <- docs %*% t(docs)
-
-print("Writing out neighbourhood matrix...\n")
-write.csv(
-	cbind(workIDs$WorkID, neighbours), 
-	"../vis/data/lambton-neighbours.csv", 
-	row.names=FALSE
-)
-print("Done!\n")
