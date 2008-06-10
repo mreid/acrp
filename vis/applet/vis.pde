@@ -31,7 +31,7 @@ void setup() {
     20,20,width-40,height-70,
     graph.xmin, graph.ymin, graph.xmin + vwidth, graph.ymin + vheight
   );
-  view.setTitle("Books from the Lambton Library");
+  view.setTitle("Books from the Lambton Miners' and Mechanics' Institute");
         
   for(int i=0; i < graph.books.size(); i++) {
     view.add((Drawable) graph.books.get(i)); 
@@ -42,7 +42,7 @@ void setup() {
   controlP5.addSlider("weightThreshold", 0.0, 1.0, 0.25, width-220, height-30, 200, 20);
   controlP5.addTextlabel("sim", "Similarity", width-120, height-30);
   controlP5.addSlider("readerThreshold", 0, 100, 0, 20, height-30, 200, 20);  
-  controlP5.addTextlabel("read", "Readers", 100, height-30);
+  controlP5.addTextlabel("read", "Borrowers", 100, height-30);
   smooth();
 }
 
@@ -76,12 +76,12 @@ void draw() {
     }
   }
   
-  drawTitles(active);
   if(selected != null) { 
+    drawNeighbours(selected, false); 
     drawTitle(selected, 0);
-    drawNeighbours(selected, true); 
   }
   
+  drawTitles(active);  
 }
   
 void drawTitle(Book book, int offset) {

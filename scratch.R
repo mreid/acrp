@@ -1,8 +1,7 @@
 # Analysis of Books as vectors of Borrowers
 #
-# TODO
-# ----
-# [_] Double check that when using `kpca` that rows correspond to instances.
+# This is my "scratch-pad" for trying out different types of analysis.
+
  
 library(RMySQL)
 library(kernlab)
