@@ -55,7 +55,7 @@ class PlotView {
      return (mouseX > vxStart && mouseX < vxEnd && mouseY > vyStart && mouseY < vyEnd);
    }
 
-	void add(Drawable drawable) { drawables.add(drawable); }
+   void add(Drawable drawable) { drawables.add(drawable); }
 
    void preDraw() {
      pushMatrix();
@@ -126,8 +126,6 @@ class PlotView {
  }
 
 class Drawable {
-	// Empty implementation to be overridden
-	void draw() {
-		
-	}
+  // Empty implementation to be overridden
+  void draw() { }
 }

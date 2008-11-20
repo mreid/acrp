@@ -11,12 +11,13 @@ Graph graph;
 PlotView view;
 Book selected;
 
+ControlP5 controlP5;
+
 void setup() {
   size(600,550, JAVA2D);
   
   frameRate(10);
   background(255);
-
 
   // Create the graph
   graph = new Graph();
@@ -38,15 +39,20 @@ void setup() {
   }
 
   // Controls for thresholds
-  ControlP5 controlP5 = new ControlP5(this);
+  controlP5 = new ControlP5(this);
   controlP5.addSlider("weightThreshold", 0.0, 1.0, 0.25, width-220, height-30, 200, 20);
   controlP5.addTextlabel("sim", "Similarity", width-120, height-30);
   controlP5.addSlider("readerThreshold", 0, 100, 0, 20, height-30, 200, 20);  
   controlP5.addTextlabel("read", "Borrowers", 100, height-30);
+
   smooth();
+  
+  // Only draw when there is a mouse event
+  noLoop();
 }
 
 void mousePressed() {
+  
   for(int i = 0; i < graph.books.size(); i++) {
     Book book = (Book) graph.books.get(i);
     
@@ -58,6 +64,20 @@ void mousePressed() {
   
   // Don't reset if click was on controls
   if(mouseY < height - 50) { selected = null; }
+  
+  redraw();
+}
+
+void mouseMoved() {
+  redraw(); 
+}
+
+void mouseDragged() {
+  redraw();
+}
+
+void mouseReleased() {
+  redraw();
 }
 
 void draw() {
@@ -81,10 +101,14 @@ void draw() {
     drawTitle(selected, 0);
   }
   
-  drawTitles(active);  
+  drawTitles(active);
+  
+  controlP5.draw();
 }
   
 void drawTitle(Book book, int offset) {
+  if(book == null) return;
+  
   stroke(0);
   fill(0);
   textFont(view.tickFont);
