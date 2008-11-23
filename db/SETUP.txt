@@ -1,0 +1,29 @@
+Notes for Setting Up MySQL DB for ACRP
+======================================
+
+Download and install MySQL 5 for Mac 10.5 from <http://mysql.mirrors.ilisys.com.au/Downloads/MySQL-5.0/mysql-5.0.67-osx10.5-x86.dmg>
+
+Set up the ACRP database and load in data:
+
+    $ mysql -u root
+    mysql> CREATE DATABASE acrp;
+    mysql> exit
+    $ mysql -u root acrp < Common_Reader.sql
+
+Set up the ACRP user using instructions here <http://dev.mysql.com/doc/refman/5.1/en/adding-users.html>:
+
+    $ mysql -u root
+    mysql> GRANT ALL PRIVILEGES ON acrp.* TO 'acrp'@'localhost' 
+        ->     IDENTIFIED BY 'acrppass' WITH GRANT OPTION;
+    mysql> exit
+
+Test the new user and database:
+
+    $ mysql -u acrp -p
+    Enter password: [acrppass]
+    mysql> use acrp;
+    mysql> SELECT Title FROM tbllitwork;
+    9147 rows in set (0.01 sec)
+    mysql> exit
+
+
