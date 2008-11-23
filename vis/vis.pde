@@ -12,9 +12,11 @@ PlotView view;
 Book selected;
 
 ControlP5 controlP5;
+Textlabel labelTitle;
 
 void setup() {
-  size(600,550, JAVA2D);
+//  size(600,550, JAVA2D);
+  size(800,750, JAVA2D);
   
   frameRate(10);
   background(255);
@@ -29,7 +31,7 @@ void setup() {
 
   // Create the view with 20 pixel horizontal margin and 50 pixel bottom margin
   view = new PlotView(
-    20,20,width-40,height-70,
+    20,20,width-40,height-100,
     graph.xmin, graph.ymin, graph.xmin + vwidth, graph.ymin + vheight
   );
   view.setTitle("Books from the Lambton Miners' and Mechanics' Institute");
@@ -45,6 +47,9 @@ void setup() {
   controlP5.addSlider("readerThreshold", 0, 100, 0, 20, height-30, 200, 20);  
   controlP5.addTextlabel("read", "Borrowers", 100, height-30);
 
+  labelTitle = controlP5.addTextlabel("title", "(No Title Selected)", 20, height-50);
+  labelTitle.setColorValue(0);  
+
   smooth();
   
   // Only draw when there is a mouse event
@@ -58,12 +63,16 @@ void mousePressed() {
     
     if(book.isActive()) {
       selected = book;
+      labelTitle.setValue(book.title);
       return;
     }
   }
   
   // Don't reset if click was on controls
-  if(mouseY < height - 50) { selected = null; }
+  if(mouseY < height - 50) { 
+    selected = null;
+    labelTitle.setValue("(No Title Selected)");
+  }
   
   redraw();
 }
