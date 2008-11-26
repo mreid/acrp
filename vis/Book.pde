@@ -5,6 +5,8 @@ class Book extends Drawable {
 	int id;
 	float x, y;
 	String title;
+        String year;
+        String author;
 	int readers;
 	
         void draw() {

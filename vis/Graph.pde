@@ -34,9 +34,11 @@ class Graph {
         Book book = new Book();
         book.id = Integer.parseInt(row[0]);
         book.title = row[1];
-        book.readers = Integer.parseInt(row[3]);
-        book.x = Float.parseFloat(row[4]);
-        book.y = Float.parseFloat(row[5]);
+        book.year = row[2];
+        book.author = row[3];
+        book.readers = Integer.parseInt(row[5]);
+        book.x = Float.parseFloat(row[6]);
+        book.y = Float.parseFloat(row[7]);
 
         // Books are added in order read, which should be sorted by ID by
         // the R program that generated the file being read. 

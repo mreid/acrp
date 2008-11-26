@@ -2,6 +2,7 @@ import controlP5.*;
 import au.com.bytecode.opencsv.*;
 import au.com.bytecode.opencsv.bean.*;
 import java.io.*;
+import java.awt.Rectangle;
 
 public int readerThreshold = 0;
 public float weightThreshold = 0.25;
@@ -10,6 +11,7 @@ ArrayList active = new ArrayList();
 Graph graph;
 PlotView view;
 Book selected;
+Rectangle lasso;
 
 ControlP5 controlP5;
 Textlabel labelTitle;
@@ -27,7 +29,7 @@ void setup() {
   graph.loadEdges("lambton-neighbours.csv");
 	
   float vwidth = (graph.xmax - graph.xmin) * 1.05;
-  float vheight = (graph.ymax - graph.ymin) *1.05;
+  float vheight = (graph.ymax - graph.ymin) * 1.05;
 
   // Create the view with 20 pixel horizontal margin and 50 pixel bottom margin
   view = new PlotView(
@@ -47,7 +49,7 @@ void setup() {
   controlP5.addSlider("readerThreshold", 0, 100, 0, 20, height-30, 200, 20);  
   controlP5.addTextlabel("read", "Borrowers", 100, height-30);
 
-  labelTitle = controlP5.addTextlabel("title", "(No Title Selected)", 20, height-50);
+  labelTitle = controlP5.addTextlabel("title", "(No Title Selected)                                   ", 20, height-50);
   labelTitle.setColorValue(0);  
 
   smooth();
@@ -56,6 +58,7 @@ void setup() {
   noLoop();
 }
 
+
 void mousePressed() {
   
   for(int i = 0; i < graph.books.size(); i++) {
@@ -63,7 +66,7 @@ void mousePressed() {
     
     if(book.isActive()) {
       selected = book;
-      labelTitle.setValue(book.title);
+      labelTitle.setValue(book.title + ", " + book.author + " (" + book.year + ")");
       return;
     }
   }
@@ -74,6 +77,10 @@ void mousePressed() {
     labelTitle.setValue("(No Title Selected)");
   }
   
+  if(selected == null) {
+    lasso = new Rectangle(mouseX, mouseY, 0, 0);
+  }
+  
   redraw();
 }
 
@@ -82,11 +89,17 @@ void mouseMoved() {
 }
 
 void mouseDragged() {
+  if(lasso != null) {
+    lasso.setSize(mouseX - lasso.x, mouseY - lasso.y); 
+  }
+
   redraw();
 }
 
 void mouseReleased() {
-  redraw();
+  lasso = null;
+
+  redraw();  
 }
 
 void draw() {
@@ -111,8 +124,17 @@ void draw() {
   }
   
   drawTitles(active);
+  drawLasso();
   
   controlP5.draw();
+}
+
+void drawLasso() {
+  stroke(0);
+  noFill();
+  if(lasso != null) {
+    rect(lasso.x, lasso.y, lasso.width, lasso.height);
+  } 
 }
   
 void drawTitle(Book book, int offset) {
