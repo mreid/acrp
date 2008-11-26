@@ -61,24 +61,31 @@ void setup() {
 
 void mousePressed() {
   
-  for(int i = 0; i < graph.books.size(); i++) {
-    Book book = (Book) graph.books.get(i);
+  if(mouseButton == RIGHT) {
+     resetZoom(); 
+  } else {
+  
+    for(int i = 0; i < graph.books.size(); i++) {
+      Book book = (Book) graph.books.get(i);
     
-    if(book.isActive()) {
-      selected = book;
-      labelTitle.setValue(book.title + ", " + book.author + " (" + book.year + ")");
+      if(book.isActive()) {
+        selected = book;
+        labelTitle.setValue(book.title + ", " + book.author + " (" + book.year + ")");
+        return;
+      }
+    }
+        
+    if(selected == null) {
+      lasso = new Rectangle(mouseX, mouseY, 0, 0);
       return;
     }
-  }
-  
-  // Don't reset if click was on controls
-  if(mouseY < height - 50) { 
-    selected = null;
-    labelTitle.setValue("(No Title Selected)");
-  }
-  
-  if(selected == null) {
-    lasso = new Rectangle(mouseX, mouseY, 0, 0);
+    
+    // Don't reset if click was on controls
+    if(mouseY < height - 50) { 
+      selected = null;
+      labelTitle.setValue("(No Title Selected)");
+    }
+
   }
   
   redraw();
@@ -97,9 +104,37 @@ void mouseDragged() {
 }
 
 void mouseReleased() {
+
+  if(lasso != null) {
+     doZoom(); 
+  }
+  
   lasso = null;
 
   redraw();  
+}
+
+void resetZoom() {
+  float vwidth = (graph.xmax - graph.xmin) * 1.05;
+  float vheight = (graph.ymax - graph.ymin) * 1.05;
+
+  // Create the view with 20 pixel horizontal margin and 50 pixel bottom margin
+  view.xStart = graph.xmin;
+  view.yStart = graph.ymin;
+  view.xEnd   = graph.xmin + vwidth;
+  view.yEnd   = graph.ymin + vheight; 
+}
+
+void doZoom() {
+  float mx0 = view.viewToModelX(lasso.x);
+  float my0 = view.viewToModelY(lasso.y);
+  float mx1 = view.viewToModelX(lasso.x + lasso.width);  
+  float my1 = view.viewToModelY(lasso.y + lasso.height);
+
+  view.xStart = min(mx0,mx1);
+  view.yStart = min(my0,my1);
+  view.xEnd = max(mx0,mx1);
+  view.yEnd = max(my0,my1);
 }
 
 void draw() {
@@ -131,6 +166,7 @@ void draw() {
 
 void drawLasso() {
   stroke(0);
+  strokeWeight(1);
   noFill();
   if(lasso != null) {
     rect(lasso.x, lasso.y, lasso.width, lasso.height);
