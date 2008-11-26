@@ -26,4 +26,7 @@ Test the new user and database:
     9147 rows in set (0.01 sec)
     mysql> exit
 
+Some extra tables now need to be computed:
+
+    $ mysql -u acrp acrp -p < setup.sql 
 

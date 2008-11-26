@@ -17,7 +17,7 @@ class Book extends Drawable {
         }
 
         float size() {
-           return sqrt(readers) / 8.5; // 70.0; 
+           return sqrt(readers) / 7.0; 
         }
 
         boolean isActive() {

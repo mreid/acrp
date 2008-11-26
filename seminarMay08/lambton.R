@@ -55,13 +55,13 @@ ndocs <- t(apply(docs, 1, function(row) { sqrt(row / sum(row)) }))
 borrowCounts <- workIDs$NumBorrowers
 borrowCounts <- borrowCounts / mean(borrowCounts)
 
-kpc <- kpca(ndocs,kernel=vanilladot,kpar=list(),features=2);
+kpc <- kpca(ndocs,kernel=vanilladot,kpar=list(),features=30);
 xys <- rotated(kpc)
 workIDs$x <- xys[,1]
 workIDs$y <- xys[,2]
 
-print("Writing out PCA coordinates\n")
-write.csv(workIDs, "../vis/data/lambton.csv", row.names=FALSE)
+#print("Writing out PCA coordinates\n")
+#write.csv(workIDs, "../vis/data/lambton.csv", row.names=FALSE)
 
 plot(xys, 
 	main=paste("Linear PCA of", numWorks, " Books\nLambton Miners' and Mechanics' Institute"),
@@ -74,10 +74,10 @@ plot(xys,
 print("Computing neighbourhood matrix...\n")
 neighbours <- docs %*% t(docs)
 
-print("Writing out neighbourhood matrix...\n")
-write.csv(
-	cbind(workIDs$WorkID, neighbours), 
-	"../vis/data/lambton-neighbours.csv", 
-	row.names=FALSE
-)
+#print("Writing out neighbourhood matrix...\n")
+#write.csv(
+#	cbind(workIDs$WorkID, neighbours), 
+#	"../vis/data/lambton-neighbours.csv", 
+#	row.names=FALSE
+#)
 print("Done!\n")

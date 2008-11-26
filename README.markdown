@@ -12,6 +12,13 @@ access to by the ACRP.
 The rest of this file is some notes I made for myself while learning about
 the database and analysing it.
 
+Requirements
+------------
+A few libraries are required in R to run this code:
+* kernlab
+* RMySQL
+* DBI
+
 Database Structure
 ------------------
 The files `*_schema.txt` in the `db` directory are dumps of the MySQL database
