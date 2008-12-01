@@ -4,6 +4,8 @@ import au.com.bytecode.opencsv.bean.*;
 import java.io.*;
 import java.awt.Rectangle;
 
+String basedir = "lambton-5";
+
 public int readerThreshold = 0;
 public float weightThreshold = 0.25;
 ArrayList active = new ArrayList();
@@ -29,12 +31,12 @@ void setup() {
 
   // Create the graph
   graph = new Graph();
-  graph.loadBooks("lambton-all.csv");
-  graph.loadEdges("lambton-neighbours-all.csv");
+  graph.loadBooks(basedir + "/coords.csv");
+  graph.loadEdges(basedir + "/neighbours.csv");
   
   // Load the library information
-  libraries = loadLibraries("libraries.csv");
-  loadLibraryWorks(libraries, "worklibs.csv");
+  libraries = loadLibraries(basedir + "/libraries.csv");
+  loadLibraryWorks(libraries, basedir + "/worklibs.csv");
 
   float vwidth = (graph.xmax - graph.xmin) * 1.05;
   float vheight = (graph.ymax - graph.ymin) * 1.05;
