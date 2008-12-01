@@ -15,7 +15,7 @@ class PlotView {
   float xStart, xEnd;
   float yStart, yEnd;
 
-  Vector drawables = new Vector();
+//  Vector drawables = new Vector();
     
   PlotView(
     int vx0, int vy0, int vWidth, int vHeight,
@@ -55,7 +55,7 @@ class PlotView {
      return (mouseX > vxStart && mouseX < vxEnd && mouseY > vyStart && mouseY < vyEnd);
    }
 
-   void add(Drawable drawable) { drawables.add(drawable); }
+//   void add(Drawable drawable) { drawables.add(drawable); }
 
    void preDraw() {
      pushMatrix();
@@ -113,13 +113,13 @@ class PlotView {
      
    }
   
-   void draw(PGraphics g) {
+   void draw(ArrayList drawables, PGraphics g) {
      drawTitle();
-//     drawBounds();
      
      preDraw();
      for(int i = 0; i < drawables.size(); i++) {
-       ((Drawable) drawables.get(i)).draw();
+       Drawable d = (Drawable) drawables.get(i);
+       if(d != null) { d.draw(); }
      }
      postDraw();
    }

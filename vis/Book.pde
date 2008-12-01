@@ -8,6 +8,7 @@ class Book extends Drawable {
         String year;
         String author;
 	int readers;
+        ArrayList libraries = new ArrayList();
 	
         void draw() {
            if(readers < readerThreshold) return;
@@ -22,8 +23,12 @@ class Book extends Drawable {
            return sqrt(readers) / 7.0; 
         }
 
+        boolean isShowing() {
+          return (readers >= readerThreshold) && (currentLib == null || (libraries.contains(currentLib)));            
+        }
+
         boolean isActive() {
-           if(readers < readerThreshold) return false;
+          if(! isShowing()) return false;
 
           float mx = view.viewToModelX(mouseX);
           float my = view.viewToModelY(mouseY);

@@ -12,22 +12,30 @@ Graph graph;
 PlotView view;
 Book selected;
 Rectangle lasso;
+ArrayList libraries;
+Library currentLib;
 
 ControlP5 controlP5;
+ScrollList listLibs;
 Textlabel labelTitle;
 
 void setup() {
 //  size(600,550, JAVA2D);
   size(800,750, JAVA2D);
   
-  frameRate(10);
+  noLoop();
+//  frameRate(10);
   background(255);
 
   // Create the graph
   graph = new Graph();
-  graph.loadBooks("lambton.csv");
-  graph.loadEdges("lambton-neighbours.csv");
-	
+  graph.loadBooks("lambton-all.csv");
+  graph.loadEdges("lambton-neighbours-all.csv");
+  
+  // Load the library information
+  libraries = loadLibraries("libraries.csv");
+  loadLibraryWorks(libraries, "worklibs.csv");
+
   float vwidth = (graph.xmax - graph.xmin) * 1.05;
   float vheight = (graph.ymax - graph.ymin) * 1.05;
 
@@ -36,11 +44,12 @@ void setup() {
     20,20,width-40,height-100,
     graph.xmin, graph.ymin, graph.xmin + vwidth, graph.ymin + vheight
   );
-  view.setTitle("Books from the Lambton Miners' and Mechanics' Institute");
+
+  view.setTitle("Books Arranged By Similarity Using t-SNE");
         
-  for(int i=0; i < graph.books.size(); i++) {
-    view.add((Drawable) graph.books.get(i)); 
-  }
+//  for(int i=0; i < graph.books.size(); i++) {
+//    view.add((Drawable) graph.books.get(i)); 
+//  }
 
   // Controls for thresholds
   controlP5 = new ControlP5(this);
@@ -52,12 +61,30 @@ void setup() {
   labelTitle = controlP5.addTextlabel("title", "(No Title Selected)                                   ", 20, height-50);
   labelTitle.setColorValue(0);  
 
-  smooth();
+  // Scroll Box for Libraries
+  ScrollList listLibs = controlP5.addScrollList("libs",width/2-120,30,240,120);
   
-  // Only draw when there is a mouse event
-  noLoop();
+  listLibs.setLabel("Choose Libraries");
+  listLibs.addItem("All Libraries",libraries.size()).setId(libraries.size());
+  
+  for(int i=0;i<libraries.size();i++) {
+    Library lib = (Library) libraries.get(i);
+    controlP5.Button b = listLibs.addItem(lib.name,i+1);
+    b.setId(i);
+  }
+  
+  listLibs.close();
+
+  smooth();  
 }
 
+ArrayList getBooks() {
+  ArrayList books = graph.books;
+  if(currentLib != null) {
+    books = currentLib.books; 
+  }
+  return books;  
+}
 
 void mousePressed() {
   
@@ -65,8 +92,10 @@ void mousePressed() {
      resetZoom(); 
   } else {
   
-    for(int i = 0; i < graph.books.size(); i++) {
-      Book book = (Book) graph.books.get(i);
+    ArrayList books = getBooks();
+    for(int i = 0; i < books.size(); i++) {
+      
+      Book book = (Book) books.get(i);
     
       if(book.isActive()) {
         selected = book;
@@ -126,6 +155,9 @@ void resetZoom() {
 }
 
 void doZoom() {
+  // Only zoom if a reasonable sized area was selected
+  if(lasso.width < 10 || lasso.height < 10) { return; }
+  
   float mx0 = view.viewToModelX(lasso.x);
   float my0 = view.viewToModelY(lasso.y);
   float mx1 = view.viewToModelX(lasso.x + lasso.width);  
@@ -135,18 +167,35 @@ void doZoom() {
   view.yStart = min(my0,my1);
   view.xEnd = max(mx0,mx1);
   view.yEnd = max(my0,my1);
+  
+  println("Zoomed!");
+}
+
+void controlEvent(ControlEvent theEvent) {
+  int id = theEvent.controller().id();
+  println("ID = " + id);
+  if(id == libraries.size()) {
+    currentLib = null;
+    view.setTitle("Viewing books from All Libraries");
+  } else if(id >= 0) {
+    currentLib = (Library) libraries.get(id);
+    view.setTitle("Viewing books from " + currentLib.name);
+    println("Library = " + currentLib.name + "," + currentLib.books.size());
+  }
 }
 
 void draw() {
   background(255);
 
-  view.draw(g);
+  ArrayList books = getBooks();
+  view.draw(books, g);
 
   int yoffset = 0;
 
   active.clear();
-  for(int i = 0; i < graph.books.size(); i++) {
-    Book book = (Book) graph.books.get(i);
+  
+  for(int i = 0; i < books.size(); i++) {
+    Book book = (Book) books.get(i);
     
     if(book.isActive()) {
       active.add(book);
@@ -160,7 +209,7 @@ void draw() {
   
   drawTitles(active);
   drawLasso();
-  
+    
   controlP5.draw();
 }
 
@@ -204,7 +253,7 @@ void drawNeighbours(Book book, boolean doTitle) {
     if(weight > weightThreshold) {
       // Only draw edges with weight larger than the threshold
         
-      if(to.readers >= readerThreshold) {
+      if(to.isShowing()) {
         // Only draw edges to visible books 
         stroke(127 - 127*weight);
         line(book.x, book.y, to.x, to.y);
