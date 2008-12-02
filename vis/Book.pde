@@ -28,7 +28,8 @@ class Book extends Drawable {
         boolean isShowing() {
           return (readers >= readerThreshold) && 
                  (currentLib == null || (libraries.contains(currentLib))) &&
-                 (authorQuery == null || authorQuery.length() == 0 || match(author, authorQuery) != null);
+                 (authorQuery == null || authorQuery.length() == 0 || match(author, authorQuery) != null) &&
+                 (titleQuery == null || titleQuery.length() == 0 || match(title, titleQuery) != null);
         }
 
         boolean isActive() {

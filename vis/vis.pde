@@ -20,8 +20,11 @@ Library currentLib;
 ControlP5 controlP5;
 ScrollList listLibs;
 Textlabel labelTitle;
+Textlabel labelAuthor;
 Textfield textAuthor;
+Textfield textTitle;
 String authorQuery;
+String titleQuery;
 
 void setup() {
 //  size(600,550, JAVA2D);
@@ -59,11 +62,15 @@ void setup() {
   controlP5 = new ControlP5(this);
   controlP5.addSlider("weightThreshold", 0.0, 1.0, 0.25, width-220, height-30, 200, 20);
   controlP5.addTextlabel("sim", "Similarity", width-120, height-30);
-  controlP5.addSlider("readerThreshold", 0, 100, 0, 20, height-30, 200, 20);  
-  controlP5.addTextlabel("read", "Borrowers", 100, height-30);
+  controlP5.addSlider("readerThreshold", 0, 100, 0, width-220, height-60, 200, 20);  
+  controlP5.addTextlabel("read", "Borrowers", width-120, height-60);
 
-  labelTitle = controlP5.addTextlabel("title", "(No Title Selected)                                   ", 20, height-50);
+  // Labels to display selected title and author
+  labelTitle = controlP5.addTextlabel("title", "(No Selection)                                   ", 20, height-60);
   labelTitle.setColorValue(0);  
+  labelAuthor = controlP5.addTextlabel("author", "                                   ", 20, height-40);
+  labelAuthor.setColorValue(0);  
+
 
   // Scroll Box for Libraries
   ScrollList listLibs = controlP5.addScrollList("libs",width/2-120,30,240,120);
@@ -79,14 +86,15 @@ void setup() {
   listLibs.close();
 
   // Text Field for Author search
-  textAuthor = controlP5.addTextfield("authorQuery", width/2 - 120, height-30, 200, 20);
+  textAuthor = controlP5.addTextfield("authorQuery", width/2 - 75, height-30, 150, 20);
+  controlP5.addTextlabel("authorLabel", "Author", width/2 - 75, height-30);
+
+  // Text Field for Title search
+  textTitle = controlP5.addTextfield("titleQuery", width/2 - 75, height-60, 150, 20);
+  controlP5.addTextlabel("titleLabel", "Title", width/2 - 75, height-60);
 
   smooth();  
 }
-
-//public void authorQuery(String theText) {
-//  println("A Textfield event: " + theText); 
-//}
 
 ArrayList getBooks() {
   ArrayList books = graph.books;
@@ -109,7 +117,8 @@ void mousePressed() {
     
       if(book.isActive()) {
         selected = book;
-        labelTitle.setValue(book.title + ", " + book.author + " (" + book.year + ")");
+        labelTitle.setValue(book.title);
+        labelAuthor.setValue(book.author + ", " + book.year);
         return;
       }
     }
@@ -120,9 +129,10 @@ void mousePressed() {
     }
     
     // Don't reset if click was on controls
-    if(mouseY < height - 50) { 
+    if(mouseY < height - 60) { 
       selected = null;
       labelTitle.setValue("(No Title Selected)");
+      labelAuthor.setValue("");
     }
 
   }
@@ -156,7 +166,7 @@ void mouseReleased() {
 // Overridden to ensure redraws when text is entered in Textfields
 void keyPressed() {
   authorQuery = textAuthor.getText();
-  println("authorQuery = "+ authorQuery);
+  titleQuery = textTitle.getText();
   redraw(); 
 }
 
@@ -237,7 +247,7 @@ void drawLasso() {
   if(lasso != null) {
     rect(lasso.x, lasso.y, lasso.width, lasso.height);
   } 
-}
+}  
   
 void drawTitle(Book book, int offset) {
   if(book == null || ! book.isShowing()) return;
