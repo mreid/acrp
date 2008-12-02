@@ -20,6 +20,8 @@ Library currentLib;
 ControlP5 controlP5;
 ScrollList listLibs;
 Textlabel labelTitle;
+Textfield textAuthor;
+String authorQuery;
 
 void setup() {
 //  size(600,550, JAVA2D);
@@ -74,11 +76,17 @@ void setup() {
     controlP5.Button b = listLibs.addItem(lib.name,i+1);
     b.setId(i);
   }
-  
   listLibs.close();
+
+  // Text Field for Author search
+  textAuthor = controlP5.addTextfield("authorQuery", width/2 - 120, height-30, 200, 20);
 
   smooth();  
 }
+
+//public void authorQuery(String theText) {
+//  println("A Textfield event: " + theText); 
+//}
 
 ArrayList getBooks() {
   ArrayList books = graph.books;
@@ -145,6 +153,13 @@ void mouseReleased() {
   redraw();  
 }
 
+// Overridden to ensure redraws when text is entered in Textfields
+void keyPressed() {
+  authorQuery = textAuthor.getText();
+  println("authorQuery = "+ authorQuery);
+  redraw(); 
+}
+
 void resetZoom() {
   float vwidth = (graph.xmax - graph.xmin) * 1.05;
   float vheight = (graph.ymax - graph.ymin) * 1.05;
@@ -174,7 +189,7 @@ void doZoom() {
 }
 
 void controlEvent(ControlEvent theEvent) {
-  int id = theEvent.controller().id();
+  int id = theEvent.controller().id();  
   println("ID = " + id);
   if(id == libraries.size()) {
     currentLib = null;
@@ -225,7 +240,7 @@ void drawLasso() {
 }
   
 void drawTitle(Book book, int offset) {
-  if(book == null) return;
+  if(book == null || ! book.isShowing()) return;
   
   stroke(0);
   fill(0);

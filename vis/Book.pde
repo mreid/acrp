@@ -23,8 +23,12 @@ class Book extends Drawable {
            return sqrt(readers) / 7.0; 
         }
 
+        // Tests whether this book should be displayed.
+        // FIXME: Horrible use of globals here
         boolean isShowing() {
-          return (readers >= readerThreshold) && (currentLib == null || (libraries.contains(currentLib)));            
+          return (readers >= readerThreshold) && 
+                 (currentLib == null || (libraries.contains(currentLib))) &&
+                 (authorQuery == null || authorQuery.length() == 0 || match(author, authorQuery) != null);
         }
 
         boolean isActive() {

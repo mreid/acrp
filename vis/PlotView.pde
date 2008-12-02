@@ -119,7 +119,7 @@ class PlotView {
      preDraw();
      for(int i = 0; i < drawables.size(); i++) {
        Drawable d = (Drawable) drawables.get(i);
-       if(d != null) { d.draw(); }
+       if(d != null && d.isShowing()) { d.draw(); }
      }
      postDraw();
    }
@@ -128,4 +128,5 @@ class PlotView {
 class Drawable {
   // Empty implementation to be overridden
   void draw() { }
+  boolean isShowing() { return true; }
 }
