@@ -16,12 +16,13 @@
 
 setwd("~/code/acrp/eReadersDec08")
 
-datadir <- "../vis/data/all-5"
-
-target_dims <- 2
-perplexity <- 5
-perc_landmarks <- 1
-
+config <- data.frame(
+	datadir = "../vis/data/eReaders2008",
+	tSNE = "./tSNE_maci",
+	target_dims = 2,
+	perplexity = 10,
+	perc_landmarks = 1
+)
 
 library(RMySQL)
 
@@ -50,7 +51,7 @@ group by
 	popular_works.WorkID"
 )
 
-# Get all the library IDs along with the total number of distinct works in each 
+# Get all the library IDs along with the total number of distinct works in each
 libraries <- dbGetQuery(con,
 "select
 	LibraryID			as ID, 
@@ -66,13 +67,16 @@ group by
 )
 
 # Get all the library IDs along with the total number of distinct works in each 
+# NOTE: The extra where clause is to ensure the same WorkIDs 
+#       are used in libworks and workIDs
 libworks <- dbGetQuery(con,
 "select distinct
 	LibraryID			as LibraryID, 
 	WorkID				as WorkID
 from
-	pop_loans
-"
+	pop_loans, tbllitauthor_tbllitwork
+where
+	pop_loans.WorkID = tbllitauthor_tbllitwork.LitWorkID"
 )
 
 # Filter out rarely borrowed books
@@ -111,9 +115,9 @@ ndocs <- docs
 datfile <- file("data.dat", "wb")
 writeBin(as.integer(nrow(ndocs)), datfile, size=4)
 writeBin(as.integer(ncol(ndocs)), datfile, size=4)
-writeBin(as.integer(target_dims), datfile, size=4)
-writeBin(as.double(perplexity), datfile, size=8)
-writeBin(as.double(perc_landmarks), datfile, size=8)
+writeBin(as.integer(config$target_dims), datfile, size=4)
+writeBin(as.double(config$perplexity), datfile, size=8)
+writeBin(as.double(config$perc_landmarks), datfile, size=8)
 for(i in 1:nrow(ndocs)) {
 	for(j in 1:ncol(ndocs)) {
 		writeBin(as.double(ndocs[i,j]), datfile, size=8)	
@@ -122,7 +126,7 @@ for(i in 1:nrow(ndocs)) {
 close(datfile)
 
 # Run the t-SNE command-line tool
-system("./tSNE_maci", wait=TRUE) 
+system(paste(config$tSNE), wait=TRUE) 
 
 # Read the `result.dat` file back in
 resultfile <- file("result.dat", "rb")
@@ -159,11 +163,17 @@ plot(mxys,
 	xaxt="n", yaxt="n"
 )
 
+print("Writing out configuration")
+write.csv(config, 
+	paste(config$datadir, "/config.csv", sep=''),
+	row.names=FALSE
+)
+
 print("Writing out tSNE coordinates\n")
 workIDs$x <- mxys[,1]
 workIDs$y <- mxys[,2]
 write.csv(workIDs, 
-	paste(datadir, "/coords.csv", sep=''), 
+	paste(config$datadir, "/coords.csv", sep=''), 
 	row.names=FALSE
 )
 
@@ -173,19 +183,19 @@ neighbours <- docs %*% t(docs)
 print("Writing out neighbourhood matrix...\n")
 write.csv(
 	cbind(workIDs$WorkID, neighbours), 
-	paste(datadir, "/neighbours.csv", sep=''), 
+	paste(config$datadir, "/neighbours.csv", sep=''), 
 	row.names=FALSE
 )
 
 print("Writing out the libraries table...\n")
 write.csv(libraries, 
-	paste(datadir, "/libraries.csv", sep=''), 
+	paste(config$datadir, "/libraries.csv", sep=''), 
 	row.names=FALSE
 )
 
 print("Writing out work/libraries table...\n")
 write.csv(libworks, 
-	paste(datadir, "/worklibs.csv", sep=''), 
+	paste(config$datadir, "/worklibs.csv", sep=''), 
 	row.names=FALSE
 )
 

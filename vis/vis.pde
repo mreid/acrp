@@ -4,7 +4,7 @@ import au.com.bytecode.opencsv.bean.*;
 import java.io.*;
 import java.awt.Rectangle;
 
-String basedir = "lambton-5";
+String basedir = "eReaders2008";
 
 public int readerThreshold = 0;
 public float weightThreshold = 0.25;
@@ -27,8 +27,8 @@ String authorQuery;
 String titleQuery;
 
 void setup() {
-//  size(600,550, JAVA2D);
-  size(800,750, JAVA2D);
+  size(750,550, JAVA2D);
+//  size(800,750, JAVA2D);
   
   noLoop();
 //  frameRate(10);
@@ -200,14 +200,12 @@ void doZoom() {
 
 void controlEvent(ControlEvent theEvent) {
   int id = theEvent.controller().id();  
-  println("ID = " + id);
   if(id == libraries.size()) {
     currentLib = null;
     view.setTitle("Viewing books from All Libraries");
   } else if(id >= 0) {
     currentLib = (Library) libraries.get(id);
     view.setTitle("Viewing books from " + currentLib.name);
-    println("Library = " + currentLib.name + "," + currentLib.books.size());
   }
 }
 
