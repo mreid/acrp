@@ -5,16 +5,16 @@
 	        <!-- charset must remain utf-8 to be handled properly by Processing -->
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		
-		<title>Visualisation of Lambton Miners' and Mechanics' Institute</title>
+		<title>vis : Built with Processing</title>
 		
 		<style type="text/css">
 		/* <![CDATA[ */
 	
 		body {
-		  width: 100%;
+  		  margin: 60px 0px 0px 55px;
 		  font-family: verdana, geneva, arial, helvetica, sans-serif; 
 		  font-size: 11px; 
-		  background-color: white; 
+		  background-color: #ddddcc; 
 		  text-decoration: none; 
 		  font-weight: normal; 
 		  line-height: normal; 
@@ -26,27 +26,19 @@
 		a:active   { color: #3399cc; text-decoration: underline; }
 		a:hover    { color: #3399cc; text-decoration: underline; }
 	
-		#content {
-			margin: 0 auto 0 auto;
-			width: 600px;
-		}
-		h1 { text-align: center;}
-		dt { font-weight: bold; }
-		address { color: #555555; text-align: center;}
 		/* ]]> */
-		</style> 
-	
+		</style>
+	 
 	</head>
 	<body>
 		<div id="content">
-			<h1>Book Similarity Visualisation</h1>
 			<div id="vis_container">
 			
 			<!--[if !IE]> -->
 				<object classid="java:vis.class" 
             			type="application/x-java-applet"
             			archive="vis.jar,controlP5.jar,opencsv.jar,opencsv.jar,core.jar"
-            			width="600" height="550"
+            			width="750" height="550"
             			standby="Loading Processing software..." >
             			
 					<param name="archive" value="vis.jar,controlP5.jar,opencsv.jar,opencsv.jar,core.jar" />
@@ -62,8 +54,8 @@
 			<!--<![endif]-->
 				
 				<object classid="clsid:8AD9C840-044E-11D1-B3E9-00805F499D93" 
-						codebase="http://java.sun.com/update/1.4.2/jinstall-1_4_2_12-windows-i586.cab"
-						width="600" height="550"
+						codebase="http://java.sun.com/update/1.5.0/jinstall-1_5_0_15-windows-i586.cab"
+						width="750" height="550"
 						standby="Loading Processing software..."  >
 						
 					<param name="code" value="vis" />
@@ -95,59 +87,18 @@
 			<!--<![endif]-->
 			
 			</div>
-			<h2>Layout</h2>
+			
 			<p>
-				Each circle represents a book found in the Lambton Miners'
-				and Mechanics' Institute.
-				Only books that were borrowed by at least 20 people across
-				all libraries in the ACRP database are shown.
-			<p>
-				The size of a circle is indicative of the number of its 
-				borrowers. 
+			
 			</p>
+			
 			<p>
-				The similarity of any two books is defined to be the proportion
-				of their borrowers they have in common.
-				The books are arranged so that similar book are placed closer 
-				together than books that are less similar. 
+			Source code: <a href="vis.pde">vis</a> <a href="Book.pde">Book</a> <a href="Graph.pde">Graph</a> <a href="Library.pde">Library</a> <a href="PlotView.pde">PlotView</a> 
 			</p>
-			<h2>Controls</h2>
+			
 			<p>
-				Hovering over a book's circle will reveal its title.
-				The number in brackets is the number of borrowers.
-			</p>
-			<p>
-				Clicking on a circle will show its &ltquo;neighbours&rtquo;
-				&mdash; those books that are most similar to it.
-			</p>
-			<p>
-				The number of books and neighbours displayed are controlled
-				by the two sliders at the bottom of the visualisation.
-			<dl>
-				<dt>Borrowers</dt>
-				<dd>
-					Only books with at least this many borrowers are displayed.
-				</dd>
-				<dt>Similarity</dt>
-				<dd>
-					Links to neighbouring books are only shown if the two books
-					share at least this proportion of their borrowers.
-				</dd>
-			</dl>
-			</p>
-			<h2>More Information</h2>
-			<p>
-				A longer description of this visualisation and the data it is
-				based on can be found at
-				<a href="http://conflate.net/inductio/2008/06/visualising-reading/" 
-				   title="Technical details about this visualisation">
-					<i>Inductio Ex Machina</i>
-				</a>
-			</p>
-			<address>
 			Built with <a href="http://processing.org" title="Processing.org">Processing</a>
-			by <a href="http://mark.reid.name" title="Mark Reid's Home Page">Mark Reid</a>.
-			</address>
+			</p>
 		</div>
 	</body>
 </html>
