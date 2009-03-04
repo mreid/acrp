@@ -5,7 +5,10 @@ class Book extends Drawable {
 	int id;
 	float x, y;
 	String title;
+        String year;
+        String author;
 	int readers;
+        ArrayList libraries = new ArrayList();
 	
         void draw() {
            if(readers < readerThreshold) return;
@@ -20,8 +23,17 @@ class Book extends Drawable {
            return sqrt(readers) / 7.0; 
         }
 
+        // Tests whether this book should be displayed.
+        // FIXME: Horrible use of globals here
+        boolean isShowing() {
+          return (readers >= readerThreshold) && 
+                 (currentLib == null || (libraries.contains(currentLib))) &&
+                 (authorQuery == null || authorQuery.length() == 0 || match(author, authorQuery) != null) &&
+                 (titleQuery == null || titleQuery.length() == 0 || match(title, titleQuery) != null);
+        }
+
         boolean isActive() {
-           if(readers < readerThreshold) return false;
+          if(! isShowing()) return false;
 
           float mx = view.viewToModelX(mouseX);
           float my = view.viewToModelY(mouseY);

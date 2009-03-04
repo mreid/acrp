@@ -1,4 +1,4 @@
-# Preprocessing of Lambton Library for tSNE.
+# Preprocessing of All Libraries for tSNE.
 # Data format for binary file `data.dat` is available at:
 #  http://ticc.uvt.nl/~lvdrmaaten/Laurens_van_der_Maaten/t-SNE_files/User%20guide_2.pdf
 #
@@ -16,8 +16,15 @@
 
 setwd("~/code/acrp/eReadersDec08")
 
+config <- data.frame(
+	datadir = "../vis/data/eReaders2008",
+	tSNE = "./tSNE_maci",
+	target_dims = 2,
+	perplexity = 10,
+	perc_landmarks = 1
+)
+
 library(RMySQL)
-library(kernlab)
 
 m <- dbDriver("MySQL")
 con <- dbConnect(m, db="acrp", user="acrp", password="acrppass")
@@ -30,14 +37,12 @@ workIDs <- dbGetQuery(con,
 "select 
 	popular_works.WorkID 			as WorkID,
 	tbllitwork.Title 				as Title,
-	tbllitwork.FirstPublicationYear	as Year,
 	tbllitauthor.Surname			as Author,
-	pop_loans.LibraryID 			as LibraryID,
+	tbllitwork.FirstPublicationYear as Year,
 	count(pop_loans.BorrowerID) 	as NumBorrowers
 from 
 	popular_works, pop_loans, tbllitwork, tbllitauthor, tbllitauthor_tbllitwork
-where 
- 	pop_loans.LibraryID = 2 and
+where
 	popular_works.WorkID = pop_loans.WorkID and
 	popular_works.WorkID = tbllitwork.LitWorkID and
 	popular_works.WorkID = tbllitauthor_tbllitwork.LitWorkID and
@@ -46,17 +51,46 @@ group by
 	popular_works.WorkID"
 )
 
-# Filter out rarely borrowed books
-workIDs <- subset(workIDs, workIDs$NumBorrowers >= 20)
-numWorks <- length(workIDs$WorkID)
+# Get all the library IDs along with the total number of distinct works in each
+libraries <- dbGetQuery(con,
+"select
+	LibraryID			as ID, 
+	Name				as Name,
+	count(WorkID)		as Size
+from
+	(select distinct LibraryID, WorkID from pop_loans) as distinctloans, 
+	tblreadlibrary
+where
+	distinctloans.LibraryID = tblreadlibrary.ReadLibraryID
+group by
+	distinctloans.LibraryID"
+)
 
-cat("Processing ", numWorks, " books\n")
+# Get all the library IDs along with the total number of distinct works in each 
+# NOTE: The extra where clause is to ensure the same WorkIDs 
+#       are used in libworks and workIDs
+libworks <- dbGetQuery(con,
+"select distinct
+	LibraryID			as LibraryID, 
+	WorkID				as WorkID
+from
+	pop_loans, tbllitauthor_tbllitwork
+where
+	pop_loans.WorkID = tbllitauthor_tbllitwork.LitWorkID"
+)
+
+# Filter out rarely borrowed books
+# workIDs <- subset(workIDs, workIDs$NumBorrowers >= 20)
+
+numWorks <- length(workIDs$WorkID)
+cat("Processing a total of ", numWorks, " works.\n")
 
 # Get all the IDs of borrowers of popular books
 borrowerIDs <- dbGetQuery(con, 
-	"select distinct BorrowerID from pop_loans where LibraryID = 2"
+	"select distinct BorrowerID from pop_loans" # where LibraryID = 2"
 )
 numBorrowers <- length(borrowerIDs$BorrowerID)
+cat("Processing a total of ", numBorrowers, " borrowers.\n")
 
 getWorks <- function(borrowerID) { loans$WorkID[loans$BorrowerID == borrowerID] }
 getBorrowers <- function(workID) { loans$BorrowerID[loans$WorkID == workID] }
@@ -75,18 +109,15 @@ for(b in borrowerIDs$BorrowerID) {
 
 # Normalise the rows (books)
 # Similarity represents proportion of borrowers in common
-ndocs <- t(apply(docs, 1, function(row) { sqrt(row / sum(row)) }))
-
-target_dims <- 2
-perplexity <- 10
-perc_landmarks <- 1
+# ndocs <- t(apply(docs, 1, function(row) { sqrt(row / sum(row)) }))
+ndocs <- docs
 
 datfile <- file("data.dat", "wb")
 writeBin(as.integer(nrow(ndocs)), datfile, size=4)
 writeBin(as.integer(ncol(ndocs)), datfile, size=4)
-writeBin(as.integer(target_dims), datfile, size=4)
-writeBin(as.double(perplexity), datfile, size=8)
-writeBin(as.double(perc_landmarks), datfile, size=8)
+writeBin(as.integer(config$target_dims), datfile, size=4)
+writeBin(as.double(config$perplexity), datfile, size=8)
+writeBin(as.double(config$perc_landmarks), datfile, size=8)
 for(i in 1:nrow(ndocs)) {
 	for(j in 1:ncol(ndocs)) {
 		writeBin(as.double(ndocs[i,j]), datfile, size=8)	
@@ -95,7 +126,7 @@ for(i in 1:nrow(ndocs)) {
 close(datfile)
 
 # Run the t-SNE command-line tool
-system("./tSNE_maci", wait=TRUE) 
+system(paste(config$tSNE), wait=TRUE) 
 
 # Read the `result.dat` file back in
 resultfile <- file("result.dat", "rb")
@@ -125,17 +156,26 @@ borrowCounts <- borrowCounts / mean(borrowCounts)
 
 # Plot the results. Borrow counts are used for circle radii.
 plot(mxys, 
-	main=paste("t-SNE of", numWorks, " Books\nLambton Miners' and Mechanics' Institute"),
+	main=paste("t-SNE of", numWorks, " Books\nAll Libraries"),
 	col=2,
 	cex=borrowCounts,
 	xlab=NA, ylab=NA, 
 	xaxt="n", yaxt="n"
 )
 
+print("Writing out configuration")
+write.csv(config, 
+	paste(config$datadir, "/config.csv", sep=''),
+	row.names=FALSE
+)
+
 print("Writing out tSNE coordinates\n")
 workIDs$x <- mxys[,1]
 workIDs$y <- mxys[,2]
-write.csv(workIDs, "../vis/data/lambton.csv", row.names=FALSE)
+write.csv(workIDs, 
+	paste(config$datadir, "/coords.csv", sep=''), 
+	row.names=FALSE
+)
 
 print("Computing neighbourhood matrix...\n")
 neighbours <- docs %*% t(docs)
@@ -143,7 +183,20 @@ neighbours <- docs %*% t(docs)
 print("Writing out neighbourhood matrix...\n")
 write.csv(
 	cbind(workIDs$WorkID, neighbours), 
-	"../vis/data/lambton-neighbours.csv", 
+	paste(config$datadir, "/neighbours.csv", sep=''), 
 	row.names=FALSE
 )
+
+print("Writing out the libraries table...\n")
+write.csv(libraries, 
+	paste(config$datadir, "/libraries.csv", sep=''), 
+	row.names=FALSE
+)
+
+print("Writing out work/libraries table...\n")
+write.csv(libworks, 
+	paste(config$datadir, "/worklibs.csv", sep=''), 
+	row.names=FALSE
+)
+
 print("Done!\n")

@@ -7,11 +7,16 @@ import java.util.ArrayList;
 class Graph {
   Hashtable edges = new Hashtable();
   ArrayList books = new ArrayList();
-
+  Hashtable idToBooks = new Hashtable();
+  
   float xmin = Float.POSITIVE_INFINITY;
   float ymin = Float.POSITIVE_INFINITY; 
   float xmax = Float.NEGATIVE_INFINITY; 
   float ymax = Float.NEGATIVE_INFINITY;
+
+  Book get(int workId) {
+    return (Book) idToBooks.get(new Integer(workId)); 
+  }
 
   void addEdge(Book from, Book to, int shared) {
     ArrayList edgeList;
@@ -34,13 +39,16 @@ class Graph {
         Book book = new Book();
         book.id = Integer.parseInt(row[0]);
         book.title = row[1];
-        book.readers = Integer.parseInt(row[3]);
-        book.x = Float.parseFloat(row[4]);
-        book.y = Float.parseFloat(row[5]);
+        book.author = row[2];
+        book.year = row[3];
+        book.readers = Integer.parseInt(row[4]);
+        book.x = Float.parseFloat(row[5]);
+        book.y = Float.parseFloat(row[6]);
 
         // Books are added in order read, which should be sorted by ID by
         // the R program that generated the file being read. 
         books.add(book);
+        idToBooks.put(new Integer(book.id), book);
 
         xmin = min(xmin, book.x); ymin = min(ymin, book.y);
         xmax = max(xmax, book.x); ymax = max(ymax, book.y);
@@ -87,7 +95,7 @@ class Graph {
  */
 class Edge {
   Book to;
-  int  shared;
+  int shared;
   
   Edge(Book to, int shared) {
     this.to = to;
