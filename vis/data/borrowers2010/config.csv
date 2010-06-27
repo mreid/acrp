@@ -1,0 +1,2 @@
+"datadir","tSNE","target_dims","perplexity","perc_landmarks"
+"../vis/data/borrowers2010","./tSNE_maci",2,10,1

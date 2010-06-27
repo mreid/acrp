@@ -2,7 +2,7 @@
 -- readers have read those works.
 
 -- Loan information: books, copies of books, loans, borrowers and libraries.
--- drop table loans;
+drop table loans;
 create table loans
 	select
 		work.LitWorkID			as WorkID,
@@ -17,7 +17,7 @@ create table loans
 	;
 
 -- Books and their total number of loans
--- drop table workcounts;
+drop table workcounts;
 create table workcounts
 	select
 		WorkID, 
@@ -27,13 +27,31 @@ create table workcounts
 	group by
 		WorkID;
 
+-- Borrowers and their total number of loans
+drop table borrowercounts;
+create table borrowercounts
+	select
+		BorrowerID, 
+		count(LoanID)	as LoanCount
+	from
+		loans
+	group by
+		BorrowerID;
+
+
 -- Books with at least 20 borrowers across all libraries.
--- drop table popular_works;
+drop table popular_works;
 create table popular_works
 	select WorkID from workcounts where LoanCount >= 20 order by LoanCount desc;
 
+-- Borrowers with at least 10 loans.
+drop table regular_borrowers;
+create table regular_borrowers
+	select BorrowerID from borrowercounts where LoanCount >= 10 order by LoanCount desc;
+
+
 -- Loans for popular books.
--- drop table pop_loans;
+drop table pop_loans;
 create table pop_loans
 	select distinct
 		popular_works.WorkID as WorkID,
@@ -44,3 +62,16 @@ create table pop_loans
 		loans
 	where 
 		loans.WorkID = popular_works.WorkID;
+
+-- Loans by regular borrowers.
+drop table regular_loans;
+create table regular_loans
+	select distinct
+		regular_borrowers.BorrowerID as BorrowerID,
+		loans.WorkID as WorkID,
+		loans.LibraryID as LibraryID
+	from 
+		regular_borrowers,
+		loans
+	where 
+		loans.BorrowerID = regular_borrowers.BorrowerID;
